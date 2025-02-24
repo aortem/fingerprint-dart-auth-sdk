@@ -1,0 +1,34 @@
+name: magic_dart_auth_sdk
+description: A Dart SDK for Magic Authentication, enabling secure server-side authentication and user management for Dart-based backend applications.
+version: 0.0.1-pre
+repository: https://github.com/aortem/magic-dart-auth-sdk
+
+environment:
+  sdk: ^3.6.0
+
+# Add regular dependencies here.
+
+dependencies:
+#------------------ STANDARD FEATURES---------------------------------
+## There are three standard libraries.  Each one can be used with a different xxx 
+
+  ds_standard_features: ^0.0.1-pre+11 #Standard Dart Team Utilities For HTTP //Default
+  build_web_compilers: ^4.0.11
+  jwt_generator: ^0.0.3
+  logging: ^1.3.0
+
+
+#------------------ TESTING FEATURES---------------------------------
+
+dev_dependencies:
+  ds_tools_testing: ^0.0.1 #Standard Dart Team Testing Tools
+  test_reporter: any #required to generate JUnit report 
+  http: any
+  git_hooks: any
+
+# Optional Local Hooks for development.
+git_hooks:
+  hooks:
+    pre-commit: ./local_dev_tools/validate_commit.dart
+    commit-msg: ./local_dev_tools/validate_commit_msg.dart
+    pre-push: ./local_dev_tools/validate_branch.dart

@@ -1,0 +1,7 @@
+# Ignore all IDE settings
+./dart_tool
+
+
+# Optional: Ignore pubspec.lock in the library root (if this is a library, not an application)
+# pubspec.lock
+

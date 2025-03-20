@@ -15,6 +15,7 @@ class Webhook {
   /// Additional event-specific data (optional).
   final Map<String, dynamic>? payload;
 
+  /// Constructor to initialize the Webhook .
   Webhook({
     required this.id,
     required this.event,

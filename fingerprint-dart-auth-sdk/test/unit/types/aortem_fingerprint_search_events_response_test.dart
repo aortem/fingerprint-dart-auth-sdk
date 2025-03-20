@@ -1,5 +1,5 @@
 import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_search_events_response.dart';
-import 'package:test/test.dart';
+import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_events_get_response.dart';
 import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_meta.dart';
 
@@ -165,7 +165,7 @@ void main() {
             'id': 'event_1',
             'timestamp': '2025-03-13T12:00:00Z',
             'details': {'type': 'login', 'status': 'success'},
-          }
+          },
         ],
         'meta': {'count': 1, 'page': 1, 'limit': 10},
       };
@@ -180,7 +180,7 @@ void main() {
 
     test('should throw error if required fields are missing', () {
       final json = {
-        'meta': {'count': 1, 'page': 1, 'limit': 10}
+        'meta': {'count': 1, 'page': 1, 'limit': 10},
       };
 
       expect(() => SearchEventsResponse.fromJson(json), throwsArgumentError);
@@ -200,8 +200,10 @@ void main() {
 
       expect(response.toString(), contains('SearchEventsResponse(events:'));
       expect(response.toString(), contains('event_1'));
-      expect(response.toString(),
-          contains('meta: Meta(count: 1, page: 1, limit: 10)'));
+      expect(
+        response.toString(),
+        contains('meta: Meta(count: 1, page: 1, limit: 10)'),
+      );
     });
   });
 }

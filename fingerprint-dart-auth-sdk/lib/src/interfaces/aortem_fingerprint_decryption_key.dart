@@ -11,10 +11,11 @@ abstract class DecryptionKey {
 class DefaultDecryptionKey implements DecryptionKey {
   @override
   final String id;
-  
+
   @override
   final String key;
 
+  /// Constructor to initialize the Decryption Key response.
   DefaultDecryptionKey({required this.id, required this.key}) {
     if (id.isEmpty) {
       throw ArgumentError('DecryptionKey id cannot be empty.');
@@ -26,9 +27,6 @@ class DefaultDecryptionKey implements DecryptionKey {
 
   /// Converts the decryption key to a JSON format.
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'key': key,
-    };
+    return {'id': id, 'key': key};
   }
 }

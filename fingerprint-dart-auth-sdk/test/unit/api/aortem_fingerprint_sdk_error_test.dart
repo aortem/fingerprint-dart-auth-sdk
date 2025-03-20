@@ -1,5 +1,5 @@
 import 'package:fingerprint_dart_auth_sdk/src/api/aortem_fingerprint_sdk_error.dart';
-import 'package:test/test.dart';
+import 'package:ds_tools_testing/ds_tools_testing.dart';
 
 void main() {
   group('SdkError', () {
@@ -31,10 +31,7 @@ void main() {
     test('should correctly format toString() without code and details', () {
       final error = SdkError(message: 'Unknown error');
 
-      expect(
-        error.toString(),
-        'SdkError: Unknown error',
-      );
+      expect(error.toString(), 'SdkError: Unknown error');
     });
   });
 }

@@ -1,5 +1,5 @@
-import 'aortem_fingerprint_meta.dart';
-import 'aortem_fingerprint_visitor.dart';
+import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_meta.dart';
+import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_visitor.dart';
 
 /// Represents the response from the FingerprintJS Pro API when fetching visitors data.
 class VisitorsResponse {
@@ -9,10 +9,10 @@ class VisitorsResponse {
   /// Metadata about the response, such as pagination details.
   final Meta meta;
 
-  VisitorsResponse({
-    required this.visitors,
-    required this.meta,
-  });
+  /// Constructor to initialize the visitors response.
+  ///
+  /// Requires a list of [visitors] and metadata [meta].
+  VisitorsResponse({required this.visitors, required this.meta});
 
   @override
   String toString() {

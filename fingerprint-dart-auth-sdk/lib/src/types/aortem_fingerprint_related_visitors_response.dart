@@ -9,10 +9,8 @@ class RelatedVisitorsResponse {
   /// Metadata about the response (e.g., pagination details).
   final Meta meta;
 
-  RelatedVisitorsResponse({
-    required this.visitors,
-    required this.meta,
-  });
+  /// Constructor to initialize the  relaeted visitors response.
+  RelatedVisitorsResponse({required this.visitors, required this.meta});
 
   /// Creates an instance of [RelatedVisitorsResponse] from a JSON map.
   factory RelatedVisitorsResponse.fromJson(Map<String, dynamic> json) {
@@ -24,9 +22,10 @@ class RelatedVisitorsResponse {
     }
 
     return RelatedVisitorsResponse(
-      visitors: (json['visitors'] as List<dynamic>)
-          .map((e) => RelatedVisitor.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      visitors:
+          (json['visitors'] as List<dynamic>)
+              .map((e) => RelatedVisitor.fromJson(e as Map<String, dynamic>))
+              .toList(),
       meta: Meta.fromJson(json['meta'] as Map<String, dynamic>),
     );
   }

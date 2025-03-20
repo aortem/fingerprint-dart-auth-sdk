@@ -1,23 +1,18 @@
-// lib/src/core/unseal_aggregate_error.dart
-
 import 'aortem_fingerprint_request_error.dart';
-
 
 /// Represents an error that occurs when unsealing aggregated response data fails.
 class UnsealAggregateError extends RequestError {
-  /// Optional additional error details or metadata.
-  final dynamic errorData;
-
   /// Creates an instance of [UnsealAggregateError].
   UnsealAggregateError({
-    required String message,
-    required int statusCode,
-    this.errorData,
-  }) : super(message: message, statusCode: statusCode);
+    required super.message,
+    required super.statusCode,
+    super.errorData, // Pass errorData to the parent class
+  });
 
   @override
   String toString() {
-    var errorString = 'UnsealAggregateError: $message (Status Code: $statusCode)';
+    var errorString =
+        'UnsealAggregateError: $message (Status Code: $statusCode)';
     if (errorData != null) {
       errorString += ' | Error Data: $errorData';
     }

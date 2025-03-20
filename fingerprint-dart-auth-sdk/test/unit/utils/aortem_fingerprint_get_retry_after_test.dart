@@ -1,6 +1,7 @@
+import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:fingerprint_dart_auth_sdk/src/utils/aortem_fingerprint_get_retry_after.dart';
-import 'package:test/test.dart';
-import 'dart:io';// Update path as needed
+
+import 'dart:io'; // Update path as needed
 
 void main() {
   group('getRetryAfter tests', () {
@@ -16,7 +17,9 @@ void main() {
       final futureTime = DateTime.now().toUtc().add(Duration(seconds: 30));
       final httpDate = HttpDate.format(futureTime);
 
-      final Map<String, String> headers = {HttpHeaders.retryAfterHeader: httpDate};
+      final Map<String, String> headers = {
+        HttpHeaders.retryAfterHeader: httpDate,
+      };
 
       final result = getRetryAfter(headers);
 
@@ -33,7 +36,9 @@ void main() {
     });
 
     test('should return null for invalid Retry-After value', () {
-      final Map<String, String> headers = {HttpHeaders.retryAfterHeader: 'invalid_value'};
+      final Map<String, String> headers = {
+        HttpHeaders.retryAfterHeader: 'invalid_value',
+      };
 
       final result = getRetryAfter(headers);
 
@@ -44,7 +49,9 @@ void main() {
       final pastTime = DateTime.now().toUtc().subtract(Duration(seconds: 30));
       final httpDate = HttpDate.format(pastTime);
 
-      final Map<String, String> headers = {HttpHeaders.retryAfterHeader: httpDate};
+      final Map<String, String> headers = {
+        HttpHeaders.retryAfterHeader: httpDate,
+      };
 
       final result = getRetryAfter(headers);
 

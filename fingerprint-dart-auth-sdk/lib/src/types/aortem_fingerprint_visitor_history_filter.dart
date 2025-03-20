@@ -16,6 +16,7 @@ class VisitorHistoryFilter {
   /// Optionally, a specific visitor identifier to filter by.
   final String? visitorId;
 
+  /// Constructor to initialize the VisitorHistoryFilter response.
   VisitorHistoryFilter({
     this.from,
     this.to,
@@ -49,7 +50,10 @@ class VisitorHistoryFilter {
   /// Converts the filter to a URL query string (for API requests).
   String toQueryString() {
     final queryParams = toJson().entries
-        .map((entry) => '${Uri.encodeComponent(entry.key)}=${Uri.encodeComponent(entry.value.toString())}')
+        .map(
+          (entry) =>
+              '${Uri.encodeComponent(entry.key)}=${Uri.encodeComponent(entry.value.toString())}',
+        )
         .join('&');
 
     return queryParams.isNotEmpty ? '?$queryParams' : '';

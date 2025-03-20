@@ -1,11 +1,11 @@
+import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:fingerprint_dart_auth_sdk/src/utils/aortem_fingerprint_get_request_path.dart';
-import 'package:test/test.dart'; // Update the path to your function
 
 void main() {
   group('getRequestPath tests', () {
     test('should return base path when no query parameters are provided', () {
       const basePath = '/api/v1/resource';
-      
+
       final result = getRequestPath(basePath);
 
       expect(result, equals(basePath));
@@ -42,14 +42,20 @@ void main() {
       expect(result, equals('/api/v1/resource?key=value%20with%20spaces'));
     });
 
-    test('should URL encode special characters like "&" and "=" in query parameters', () {
-      const basePath = '/api/v1/resource';
-      final queryParams = {'key': 'value&with=special characters'};
+    test(
+      'should URL encode special characters like "&" and "=" in query parameters',
+      () {
+        const basePath = '/api/v1/resource';
+        final queryParams = {'key': 'value&with=special characters'};
 
-      final result = getRequestPath(basePath, queryParams);
+        final result = getRequestPath(basePath, queryParams);
 
-      expect(result, equals('/api/v1/resource?key=value%26with%3Dspecial%20characters'));
-    });
+        expect(
+          result,
+          equals('/api/v1/resource?key=value%26with%3Dspecial%20characters'),
+        );
+      },
+    );
 
     test('should handle numeric query parameters correctly', () {
       const basePath = '/api/v1/resource';

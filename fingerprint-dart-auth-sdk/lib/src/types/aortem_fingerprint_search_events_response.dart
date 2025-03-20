@@ -10,10 +10,8 @@ class SearchEventsResponse {
   /// Metadata related to the search results (pagination details, total count, etc.).
   final Meta meta;
 
-  SearchEventsResponse({
-    required this.events,
-    required this.meta,
-  });
+  /// Constructor to initialize the Search Event response.
+  SearchEventsResponse({required this.events, required this.meta});
 
   /// Creates an instance of [SearchEventsResponse] from a JSON map.
   factory SearchEventsResponse.fromJson(Map<String, dynamic> json) {
@@ -25,9 +23,10 @@ class SearchEventsResponse {
     }
 
     return SearchEventsResponse(
-      events: (json['events'] as List<dynamic>)
-          .map((e) => Event.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      events:
+          (json['events'] as List<dynamic>)
+              .map((e) => Event.fromJson(e as Map<String, dynamic>))
+              .toList(),
       meta: Meta.fromJson(json['meta'] as Map<String, dynamic>),
     );
   }

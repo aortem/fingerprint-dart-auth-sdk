@@ -1,5 +1,5 @@
 import 'package:fingerprint_dart_auth_sdk/src/utils/aortem_fingerprint_get_integration_info.dart';
-import 'package:test/test.dart';
+import 'package:ds_tools_testing/ds_tools_testing.dart';
 
 void main() {
   group('IntegrationInfo Tests', () {
@@ -25,9 +25,11 @@ void main() {
       );
 
       expect(
-          integration.toString(),
-          equals(
-              'IntegrationInfo(type: client, version: 2.1.0, publicKey: public-key-456)'));
+        integration.toString(),
+        equals(
+          'IntegrationInfo(type: client, version: 2.1.0, publicKey: public-key-456)',
+        ),
+      );
     });
 
     test('should create an instance from JSON', () {

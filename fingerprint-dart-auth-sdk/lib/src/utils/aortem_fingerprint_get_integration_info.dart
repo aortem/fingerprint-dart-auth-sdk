@@ -12,6 +12,9 @@ class IntegrationInfo {
   /// The public API key associated with the integration.
   final String publicKey;
 
+  /// Constructor to initialize integration metadata.
+  ///
+  /// Requires [name], [type], [version], and [publicKey].
   IntegrationInfo({
     required this.name,
     required this.type,
@@ -25,6 +28,8 @@ class IntegrationInfo {
   }
 
   /// Creates an instance from a JSON object.
+  ///
+  /// Defaults to 'unknown' for missing values.
   factory IntegrationInfo.fromJson(Map<String, dynamic> json) {
     return IntegrationInfo(
       name: json['name'] as String? ?? 'unknown',

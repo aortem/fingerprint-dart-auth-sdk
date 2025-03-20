@@ -1,5 +1,5 @@
 import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_search_events_filter.dart';
-import 'package:test/test.dart';
+import 'package:ds_tools_testing/ds_tools_testing.dart';
 
 void main() {
   group('SearchEventsFilter', () {
@@ -64,10 +64,7 @@ void main() {
     });
 
     test('should handle missing fields in JSON', () {
-      final json = {
-        'query': 'login_attempt',
-        'limit': 50,
-      };
+      final json = {'query': 'login_attempt', 'limit': 50};
 
       final filter = SearchEventsFilter.fromJson(json);
 
@@ -80,11 +77,7 @@ void main() {
     });
 
     test('should handle numeric values as strings', () {
-      final json = {
-        'query': 'login_attempt',
-        'limit': '50',
-        'offset': '10',
-      };
+      final json = {'query': 'login_attempt', 'limit': '50', 'offset': '10'};
 
       final filter = SearchEventsFilter.fromJson(json);
 

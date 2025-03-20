@@ -10,17 +10,19 @@ import 'aortem_fingerprint_request_error.dart';
 
 /// A client for interacting with the FingerprintJS Pro Server API.
 class FingerprintJsServerApiClient {
+  /// - [apiKey]: The API key for authentication (must be provided).
   final String apiKey;
+
+  /// - [baseUrl]: The base URL of the API (optional, defaults based on the region).
   final String baseUrl;
+
+  /// - [region]: The geographic region for routing requests (default: `Region.us`).
   final Region region;
+
+  /// - [timeout]: The request timeout duration (default: 10 seconds).
   final Duration timeout;
 
   /// Creates an instance of the API client.
-  ///
-  /// - [apiKey]: The API key for authentication (must be provided).
-  /// - [region]: The geographic region for routing requests (default: `Region.us`).
-  /// - [baseUrl]: The base URL of the API (optional, defaults based on the region).
-  /// - [timeout]: The request timeout duration (default: 10 seconds).
   FingerprintJsServerApiClient({
     required this.apiKey,
     this.region = Region.defaultRegion,
@@ -60,8 +62,10 @@ class FingerprintJsServerApiClient {
     }
 
     final encodedQueryParams = queryParams.entries
-        .map((e) =>
-            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
+        .map(
+          (e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}',
+        )
         .join('&');
 
     return '$basePath?$encodedQueryParams';
@@ -83,16 +87,13 @@ class FingerprintJsServerApiClient {
   /// - [fingerprintData]: The fingerprint payload to send for verification.
   /// - Returns: A parsed response as a `Map<String, dynamic>`.
   Future<Map<String, dynamic>> verifyFingerprint(
-      Map<String, dynamic> fingerprintData) async {
+    Map<String, dynamic> fingerprintData,
+  ) async {
     final requestPath = getRequestPath('/verify');
     final url = Uri.parse('$baseUrl$requestPath');
 
     final response = await http
-        .post(
-          url,
-          headers: _getHeaders(),
-          body: jsonEncode(fingerprintData),
-        )
+        .post(url, headers: _getHeaders(), body: jsonEncode(fingerprintData))
         .timeout(timeout);
 
     return _handleResponse(response);
@@ -129,8 +130,9 @@ class FingerprintJsServerApiClient {
               .timeout(timeout);
           break;
         case 'GET':
-          response =
-              await http.get(url, headers: _getHeaders()).timeout(timeout);
+          response = await http
+              .get(url, headers: _getHeaders())
+              .timeout(timeout);
           break;
         default:
           throw ArgumentError('Unsupported HTTP method: $method');
@@ -140,10 +142,15 @@ class FingerprintJsServerApiClient {
         final retryDuration = getRetryAfter(response.headers);
         if (retryDuration != null) {
           print(
-              'Rate limit exceeded. Retrying after: ${retryDuration.inSeconds} seconds');
+            'Rate limit exceeded. Retrying after: ${retryDuration.inSeconds} seconds',
+          );
           await Future.delayed(retryDuration);
           return _sendRequest<T>(
-              method: method, endpoint: endpoint, body: body, parser: parser);
+            method: method,
+            endpoint: endpoint,
+            body: body,
+            parser: parser,
+          );
         }
       }
 

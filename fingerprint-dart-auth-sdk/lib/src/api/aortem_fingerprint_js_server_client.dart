@@ -10,17 +10,20 @@ import 'aortem_fingerprint_request_error.dart';
 
 /// A client for interacting with the FingerprintJS Pro Server API.
 class FingerprintJsServerApiClient {
-  /// - [apiKey]: The API key for authentication (must be provided).
+  /// The API key for authentication.
   final String apiKey;
 
-  /// - [baseUrl]: The base URL of the API (optional, defaults based on the region).
+  /// The base URL of the API (determined by region if not provided).
   final String baseUrl;
 
-  /// - [region]: The geographic region for routing requests (default: `Region.us`).
+  /// The geographic region for routing requests.
   final Region region;
 
-  /// - [timeout]: The request timeout duration (default: 10 seconds).
+  /// The request timeout duration.
   final Duration timeout;
+
+  /// HTTP client (allows dependency injection for testing).
+  final http.Client client;
 
   /// Creates an instance of the API client.
   FingerprintJsServerApiClient({
@@ -28,7 +31,9 @@ class FingerprintJsServerApiClient {
     this.region = Region.defaultRegion,
     String? baseUrl,
     this.timeout = const Duration(seconds: 10),
-  }) : baseUrl = baseUrl ?? _getBaseUrl(region) {
+    http.Client? client, // Dependency injection for testability
+  }) : baseUrl = baseUrl ?? _getBaseUrl(region),
+       client = client ?? http.Client() {
     if (apiKey.isEmpty) {
       throw ArgumentError('API key must be provided.');
     }
@@ -47,11 +52,6 @@ class FingerprintJsServerApiClient {
   }
 
   /// Constructs a properly encoded request path with optional query parameters.
-  ///
-  /// - [basePath]: The base endpoint path.
-  /// - [queryParams]: Optional map of query parameters.
-  ///
-  /// Returns a URL-encoded request path.
   String getRequestPath(String basePath, [Map<String, dynamic>? queryParams]) {
     if (basePath.isEmpty) {
       throw ArgumentError('Base path cannot be empty.');
@@ -72,8 +72,6 @@ class FingerprintJsServerApiClient {
   }
 
   /// Retrieves integration metadata from the FingerprintJS Pro API.
-  ///
-  /// - Returns: An `IntegrationInfo` object containing integration details.
   Future<IntegrationInfo> getIntegrationInfo() async {
     return await _sendRequest<IntegrationInfo>(
       method: 'GET',
@@ -83,26 +81,17 @@ class FingerprintJsServerApiClient {
   }
 
   /// Verifies a fingerprint against the API.
-  ///
-  /// - [fingerprintData]: The fingerprint payload to send for verification.
-  /// - Returns: A parsed response as a `Map<String, dynamic>`.
   Future<Map<String, dynamic>> verifyFingerprint(
     Map<String, dynamic> fingerprintData,
   ) async {
-    final requestPath = getRequestPath('/verify');
-    final url = Uri.parse('$baseUrl$requestPath');
-
-    final response = await http
-        .post(url, headers: _getHeaders(), body: jsonEncode(fingerprintData))
-        .timeout(timeout);
-
-    return _handleResponse(response);
+    return await _sendRequest<Map<String, dynamic>>(
+      method: 'POST',
+      endpoint: '/verify',
+      body: fingerprintData,
+    );
   }
 
   /// Retrieves visitor data from the API.
-  ///
-  /// - [visitorId]: The visitor ID to fetch data for.
-  /// - Returns: A parsed response as a `Map<String, dynamic>`.
   Future<Map<String, dynamic>> getVisitorData(String visitorId) async {
     return await _sendRequest<Map<String, dynamic>>(
       method: 'GET',
@@ -120,17 +109,17 @@ class FingerprintJsServerApiClient {
     final requestPath = getRequestPath(endpoint);
     final url = Uri.parse('$baseUrl$requestPath');
 
-    http.Response response;
+    late http.Response response;
 
     try {
       switch (method.toUpperCase()) {
         case 'POST':
-          response = await http
-              .post(url, headers: _getHeaders(), body: body)
+          response = await client
+              .post(url, headers: _getHeaders(), body: jsonEncode(body))
               .timeout(timeout);
           break;
         case 'GET':
-          response = await http
+          response = await client
               .get(url, headers: _getHeaders())
               .timeout(timeout);
           break;
@@ -173,13 +162,21 @@ class FingerprintJsServerApiClient {
 
   /// Handles HTTP responses and converts them into readable formats.
   Map<String, dynamic> _handleResponse(http.Response response) {
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body) as Map<String, dynamic>;
-    } else {
+    try {
+      final decodedBody = jsonDecode(response.body) as Map<String, dynamic>;
+      if (response.statusCode == 200) {
+        return decodedBody;
+      } else {
+        throw RequestError(
+          message: 'API request failed',
+          statusCode: response.statusCode,
+          errorData: decodedBody,
+        );
+      }
+    } catch (e) {
       throw RequestError(
-        message: 'API request failed',
+        message: 'Invalid response format',
         statusCode: response.statusCode,
-        errorData: jsonDecode(response.body),
       );
     }
   }

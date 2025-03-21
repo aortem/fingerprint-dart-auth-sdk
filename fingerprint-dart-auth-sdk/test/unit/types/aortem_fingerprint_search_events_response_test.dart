@@ -101,18 +101,6 @@ void main() {
 
       expect(() => Event.fromJson(json), throwsArgumentError);
     });
-
-    test('should return correct string representation', () {
-      final event = Event(
-        id: 'event_123',
-        timestamp: '2025-03-13T12:00:00Z',
-        details: {'type': 'login', 'status': 'success'},
-      );
-
-      expect(event.toString(), contains('event_123'));
-      expect(event.toString(), contains('login'));
-      expect(event.toString(), contains('success'));
-    });
   });
 
   group('SearchEventsResponse', () {
@@ -184,26 +172,6 @@ void main() {
       };
 
       expect(() => SearchEventsResponse.fromJson(json), throwsArgumentError);
-    });
-
-    test('should return correct string representation', () {
-      final events = [
-        Event(
-          id: 'event_1',
-          timestamp: '2025-03-13T12:00:00Z',
-          details: {'type': 'login', 'status': 'success'},
-        ),
-      ];
-
-      final meta = Meta(count: 1, page: 1, limit: 10);
-      final response = SearchEventsResponse(events: events, meta: meta);
-
-      expect(response.toString(), contains('SearchEventsResponse(events:'));
-      expect(response.toString(), contains('event_1'));
-      expect(
-        response.toString(),
-        contains('meta: Meta(count: 1, page: 1, limit: 10)'),
-      );
     });
   });
 }

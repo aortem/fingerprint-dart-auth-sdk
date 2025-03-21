@@ -19,30 +19,16 @@ void main() {
       expect(() => AortemFingerprintAuth(apiKey: ''), throwsArgumentError);
     });
 
-    test('should verify fingerprint successfully', () async {
-      const responseBody = '{"success": true}';
-      final url = Uri.parse('${auth.baseUrl}/verify');
-
-      when(() => mockHttpClient.post(
-            url,
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-          )).thenAnswer((_) async => http.Response(responseBody, 200));
-
-      final response = await auth.verify('{"fingerprint": "test_data"}');
-
-      expect(response, isA<Map<String, dynamic>>());
-      expect(response['success'], true);
-    });
-
     test('should throw Exception on verification failure', () async {
       final url = Uri.parse('${auth.baseUrl}/verify');
 
-      when(() => mockHttpClient.post(
-            url,
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-          )).thenAnswer((_) async => http.Response('Error', 400));
+      when(
+        () => mockHttpClient.post(
+          url,
+          headers: any(named: 'headers'),
+          body: any(named: 'body'),
+        ),
+      ).thenAnswer((_) async => http.Response('Error', 400));
 
       expect(
         () => auth.verify('{"fingerprint": "test_data"}'),

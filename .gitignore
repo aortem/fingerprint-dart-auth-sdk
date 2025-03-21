@@ -1,0 +1,26 @@
+# Ignore all IDE settings
+.idea/
+
+# Ignore Flutter plugin files in example project
+/fingerprint_dart_auth_sdk/example/fingerprint_dart_auth_sdk-sample-app/.flutter-plugins
+/fingerprint_dart_auth_sdk/example/fingerprint_dart_auth_sdk-sample-app/.flutter-plugins-dependencies
+
+# Ignore macOS generated files in example project
+/fingerprint_dart_auth_sdk/example/fingerprint_dart_auth_sdk-sample-app/macos/Flutter/GeneratedPluginRegistrant.swift
+
+#Ignore Release Key
+/fingerprint_dart_auth_sdk/example/fingerprint_dart_auth_sdk-sample-app/fingerprint_dart_auth_sdk-release-key.jks
+
+#Ignore Service Account JSON Key
+/fingerprint_dart_auth_sdk/example/fingerprint_dart_auth_sdk-sample-app/assets/service_account.json
+
+#Ignore Gradle Properties
+/fingerprint_dart_auth_sdk/example/fingerprint_dart_auth_sdk-sample-app/android/gradle.properties
+
+#Ignore Gradle Wrapper Properties
+/fingerprint_dart_auth_sdk/example/fingerprint_dart_auth_sdk-sample-app/android/gradle/wrapper/gradle-wrapper.properties
+
+
+# Optional: Ignore pubspec.lock in the library root (if this is a library, not an application)
+# Uncomment the line below if fingerprint_dart_auth_sdk is a package:
+# pubspec.lock

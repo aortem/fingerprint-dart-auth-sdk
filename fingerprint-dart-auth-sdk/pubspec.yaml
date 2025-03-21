@@ -9,7 +9,7 @@ environment:
 # Add regular dependencies here.
 
 dependencies:
-#------------------ STANDARD FEATURES---------------------------------
+#------------------ STANDARD FEATURES----------------------dart-----------
 ## There are three standard libraries.  Each one can be used with a different xxx 
 
   ds_standard_features: ^0.0.1-pre+11 #Standard Dart Team Utilities For HTTP //Default

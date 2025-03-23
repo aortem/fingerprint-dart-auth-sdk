@@ -93,7 +93,7 @@ validate_dart_sdk_version:
   script:
     - echo "Validating Dart SDK versions in all pubspec.yaml files..."
     - apk add --no-cache grep
-    - cd transmit-dart-auth-sdk
+    - cd fingerprint-dart-auth-sdk
 
     # Find all pubspec.yaml files (recursively, all levels)
     - PUBSPEC_FILES=$(find . -name "pubspec.yaml")
@@ -147,7 +147,7 @@ analyze_main:
     - validate_commit_messages
   script:
     - echo "Analyzing main project..."
-    - cd transmit-dart-auth-sdk
+    - cd fingerprint-dart-auth-sdk
     - dart pub get || { echo "Failed to install dependencies. Exiting..."; exit 1; }
     - dart analyze lib/ > analysis_report.txt 2> error_log.txt || true
 

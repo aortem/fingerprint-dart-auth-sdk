@@ -1,7 +1,5 @@
 # Add your own git ignore rules.
 
-Ignore Build Folders/Files
-
 **/build/
 
 # Ignore Flutter plugin files in example project

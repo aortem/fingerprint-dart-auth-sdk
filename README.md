@@ -8,7 +8,7 @@
 <!-- x-hide-in-docs-end -->
 <p align="center" class="github-badges">
   <!-- GitHub Tag Badge -->
-  <a href="https://github.com/aortem/Transmit-dart-auth-sdk/tags">
+  <a href="https://github.com/aortem/Fingerprint-dart-auth-sdk/tags">
     <img alt="GitHub Tag" src="https://img.shields.io/github/v/tag/aortem/transmit-dart-auth-sdk?style=for-the-badge" />
   </a>
   <!-- Dart-Specific Badges -->
@@ -20,12 +20,12 @@
   </a>
 <!-- x-hide-in-docs-start -->
 
-# Transmit Dart Auth SDK
+# Fingerprint Dart Auth SDK
 
-Transmit Dart Auth SDK is designed to provide select out of the box features of Transmit in Dart.  Both low level and high level abstractions are provided.
+Fingerprint Dart Auth SDK is designed to provide select out of the box features of Fingerprint in Dart.  Both low level and high level abstractions are provided.
 
 ## Features
-This implementation does not yet support all functionalities of the Transmit authentication service. Here is a list of functionalities with the current support status:
+This implementation does not yet support all functionalities of the Fingerprint authentication service. Here is a list of functionalities with the current support status:
 
 | #  | Method                                                     | Supported |
 |----|------------------------------------------------------------|:---------:|
@@ -73,22 +73,22 @@ This implementation does not yet support all functionalities of the Transmit aut
 
 ## Available Versions
 
-Transmit Dart Auth SDK is available in two versions to cater to different needs:
+Fingerprint Dart Auth SDK is available in two versions to cater to different needs:
 
 1. **Main - Stable Version**: Usually one release a month.  This version attempts to keep stability without introducing breaking changes.
 2. **Sample Apps - FrontEnd Version**: The sample apps are provided in various frontend languages in order to allow maximum flexibility with your frontend implementation with the Dart backend.  Note that new features are first tested in the sample apps before being released in the mainline branch. Use only as a guide for your frontend/backend implementation of Dart.
 
 ## Documentation
 
-For detailed guides, API references, and example projects, visit our [Transmit Dart Auth SDK Documentation](https://sdks.aortem.io/transmit-dart-auth-sdk). Start building with  Transmit Dart Auth SDK today and take advantage of its robust features and elegant syntax.
+For detailed guides, API references, and example projects, visit our [Fingerprint Dart Auth SDK Documentation](https://sdks.aortem.io/transmit-dart-auth-sdk). Start building with  Fingerprint Dart Auth SDK today and take advantage of its robust features and elegant syntax.
 
 ## Examples
 
-Explore the `/example` directory in this repository to find sample applications demonstrating  Transmit Dart Auth SDK's capabilities in real-world scenarios.
+Explore the `/example` directory in this repository to find sample applications demonstrating  Fingerprint Dart Auth SDK's capabilities in real-world scenarios.
 
 ## Contributing
 
-We welcome contributions of all forms from the community! If you're interested in helping improve  Transmit Dart Auth SDK, please fork the repository and submit your pull requests. For more details, check out our [CONTRIBUTING.md](CONTRIBUTING.md) guide.  Our team will review your pull request. Once approved, we will integrate your changes into our primary repository and push the mirrored changes on the main github branch.
+We welcome contributions of all forms from the community! If you're interested in helping improve  Fingerprint Dart Auth SDK, please fork the repository and submit your pull requests. For more details, check out our [CONTRIBUTING.md](CONTRIBUTING.md) guide.  Our team will review your pull request. Once approved, we will integrate your changes into our primary repository and push the mirrored changes on the main github branch.
 
 ## Support
 
@@ -96,7 +96,7 @@ For support across all Aortem open-source products, including this SDK, visit ou
 
 ## Licensing
 
-The **Transmit Dart Auth SDK** is licensed under a dual-license approach:
+The **Fingerprint Dart Auth SDK** is licensed under a dual-license approach:
 
 1. **BSD-3 License**:
    - Applies to all packages and libraries in the SDK.
@@ -114,6 +114,6 @@ The **Transmit Dart Auth SDK** is licensed under a dual-license approach:
 - You are free to use the SDK in your applications, including open-source and commercial projects, as long as the SDK is not directly offered as part of a third-party cloud service.
 - For details, refer to the [LICENSE](LICENSE.md) file.
 
-## Enhance with Transmit Dart Auth SDK
+## Enhance with Fingerprint Dart Auth SDK
 
-We hope the Transmit Dart Auth SDK helps you to efficiently build and scale your server-side applications. Join our growing community and start contributing to the ecosystem today!
+We hope the Fingerprint Dart Auth SDK helps you to efficiently build and scale your server-side applications. Join our growing community and start contributing to the ecosystem today!

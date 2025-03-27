@@ -5,215 +5,115 @@
   </picture>
 </p>
 
-<h2 align="center">fingerprint_dart_auth_sdk</h2>
-
 <!-- x-hide-in-docs-end -->
 <p align="center" class="github-badges">
-  <!-- Release Badge -->
-  <a href="https://github.com/aortem/fingerprint_dart_auth_sdk/tags">
-    <img alt="Release" src="https://img.shields.io/static/v1?label=release&message=v0.0.1-pre+10&color=blue&style=for-the-badge" />
+  <!-- GitHub Tag Badge -->
+  <a href="https://github.com/aortem/Fingerprint-dart-auth-sdk/tags">
+    <img alt="GitHub Tag" src="https://img.shields.io/github/v/tag/aortem/transmit-dart-auth-sdk?style=for-the-badge" />
   </a>
-  <br/>
   <!-- Dart-Specific Badges -->
-  <a href="https://pub.dev/packages/fingerprint_dart_auth_sdk">
-    <img alt="Pub Version" src="https://img.shields.io/pub/v/fingerprint_dart_auth_sdk.svg?style=for-the-badge" />
+  <a href="https://pub.dev/packages/transmit_dart_auth_sdk">
+    <img alt="Pub Version" src="https://img.shields.io/pub/v/transmit_dart_auth_sdk.svg?style=for-the-badge" />
   </a>
   <a href="https://dart.dev/">
     <img alt="Built with Dart" src="https://img.shields.io/badge/Built%20with-Dart-blue.svg?style=for-the-badge" />
   </a>
- <!-- fingerprint Badge -->
-   <a href="https://fingerprint.google.com/docs/reference/admin/node/fingerprint-admin.auth?_gl=1*1ewipg9*_up*MQ..*_ga*NTUxNzc0Mzk3LjE3MzMxMzk3Mjk.*_ga_CW55HF8NVT*MTczMzEzOTcyOS4xLjAuMTczMzEzOTcyOS4wLjAuMA..">
-    <img alt="API Reference" src="https://img.shields.io/badge/API-reference-blue.svg?style=for-the-badge" />
-  <br/>
-<!-- Pipeline Badge -->
-<a href="https://github.com/aortem/fingerprint_dart_auth_sdk/actions">
-  <img alt="Pipeline Status" src="https://img.shields.io/github/actions/workflow/status/aortem/fingerprint_dart_auth_sdk/dart-analysis.yml?branch=main&label=pipeline&style=for-the-badge" />
-</a>
-<!-- Code Coverage Badges -->
-  </a>
-  <a href="https://codecov.io/gh/open-feature/dart-server-sdk">
-    <img alt="Code Coverage" src="https://codecov.io/gh/open-feature/dart-server-sdk/branch/main/graph/badge.svg?token=FZ17BHNSU5" />
-<!-- Open Source Badge -->
-  </a>
-  <a href="https://bestpractices.coreinfrastructure.org/projects/6601">
-    <img alt="CII Best Practices" src="https://bestpractices.coreinfrastructure.org/projects/6601/badge?style=for-the-badge" />
-  </a>
-</p>
 <!-- x-hide-in-docs-start -->
 
-## **Feature Comparison Chart**
+# Fingerprint Dart Auth SDK
 
-### **Core Authentication Methods**
+Fingerprint Dart Auth SDK is designed to provide select out of the box features of Fingerprint in Dart.  Both low level and high level abstractions are provided.
 
-# Firebase vs Amazon Fingerprint for Server-Side Dart SDK
+## Features
+This implementation does not yet support all functionalities of the Fingerprint authentication service. Here is a list of functionalities with the current support status:
 
-This document provides a high-level comparison of Firebase Authentication and Amazon Fingerprint features tailored for building a server-side Dart SDK. The goal is to evaluate how a server-side Dart SDK could integrate Amazon Fingerprint and compare its capabilities to Firebase Authentication.
-
-
-## **Feature Comparison Chart**
-
-### **Core Authentication Methods**
-
-| Firebase Method                                  | Amazon Fingerprint Equivalent                       | Notes                                                                                  | Supported |
-|--------------------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------------- |-------------|
-| `FirebaseAuth.signInWithEmailAndPassword()`      | Fingerprint Admin: `AdminInitiateAuth`             | Authenticate user with email and password. Server-side API supports admin privileges.  | ✅         |
-| `FirebaseAuth.createUserWithEmailAndPassword()`  | Fingerprint Admin: `AdminCreateUser`               | Server-side method to create a new user in the user pool.                              | ✅         |
-| `FirebaseAuth.signOut()`                         | Not Applicable                                 | Fingerprint does not provide server-side logout; tokens must be invalidated by the client. | ❌         |
-| `FirebaseAuth.setPersistence()`                  | Not Applicable                                 | Token persistence is a client-side feature.                                            | ❌         |
-| `FirebaseAuth.sendPasswordResetEmail()`          | Fingerprint Admin: `AdminResetUserPassword`        | Sends a reset password request to the user.                                            | ✅         |
-| `FirebaseAuth.connectAuthEmulator`               | Not Applicable                                 | Fingerprint does not support emulated authentication environments.                         | ❌         |
-
----
-
-### **User Management**
-
-| Firebase Method                                  | Amazon Fingerprint Equivalent                      | Notes                                                                                   | Supported |
-|--------------------------------------------------|------------------------------------------------|-----------------------------------------------------------------------------------------|-------------|
-| `FirebaseUser.updateEmail()`                     | Fingerprint Admin: `AdminUpdateUserAttributes`     | Updates the user's email or other attributes.                                           | ✅         |
-| `FirebaseUser.updatePassword()`                  | Fingerprint Admin: `AdminSetUserPassword`          | Updates the user's password.                                                            | ✅         |
-| `FirebaseUser.deleteUser()`                      | Fingerprint Admin: `AdminDeleteUser`               | Deletes the user account from the user pool.                                            | ✅         |
-| `FirebaseUser.updateProfile()`                   | Fingerprint Admin: `AdminUpdateUserAttributes`     | Updates custom attributes in the user's profile.                                        | ✅         |
-| `FirebaseUser.sendEmailVerification()`           | Not Applicable                                 | Fingerprint uses built-in email verification workflows; server-side triggering is indirect. | ❌         |
-| `FirebaseUser.reload()`                          | Fingerprint Admin: `AdminGetUser`                  | Refreshes the user profile information.                                                 | ✅         |
-| `FirebaseAuth.updateCurrentUser()`               | Fingerprint Admin: `AdminUpdateUserAttributes`     | Updates the current user's details, such as profile attributes.                         | ✅         |
-
----
-
-### **Token Management**
-
-| Firebase Method                                  | Amazon Fingerprint Equivalent                      | Notes                                                                                 | Supported  |
-|--------------------------------------------------|------------------------------------------------|---------------------------------------------------------------------------------------|------------|
-| `FirebaseAuth.getIdToken()`                      | Fingerprint: `InitiateAuth`                        | Retrieves tokens for user sessions.                                                   | ✅         |
-| `FirebaseAuth.revokeAccessToken()`               | Fingerprint: `RevokeToken`                         | Revokes a user's refresh token.                                                       | ✅         |
-| `FirebaseAuth.signInWithCustomToken()`           | Not Applicable                                 | Fingerprint does not support custom tokens like Firebase.                                 | ❌         |
-
----
-
-### **Multi-Factor Authentication (MFA)**
-
-| Firebase Method                                  | Amazon Fingerprint Equivalent                      | Notes                                                                                | Supported   |
-|--------------------------------------------------|------------------------------------------------|----------------------------------------------------------------------------------------|-------------|
-| `FirebaseAuth.getMultiFactorResolver()`          | Fingerprint Admin: `AdminSetUserMFAPreference`     | Retrieve MFA configurations and set user preferences.                                  | ✅         |
-| `FirebaseUser.multiFactor()`                     | Fingerprint: `AssociateSoftwareToken`              | Registers a user for software-based MFA (e.g., TOTP).                                  | ✅         |
-| `FirebaseUser.reauthenticateWithCredential()`    | Fingerprint: `InitiateAuth`                        | Reauthenticates the user with credentials.                                             | ✅         |
-
----
-
-### **Sign-In Methods**
-
-| Firebase Method                                 | Amazon Fingerprint Equivalent                      | Notes                                                                                  | Supported |
-|-------------------------------------------------|------------------------------------------------|---------------------------------------------------------------------------------------|-----------|
-| `FirebaseAuth.signInWithPopup()`                | Not Applicable                                 | Fingerprint does not support popup-based authentication flows.                             | ❌         |
-| `FirebaseAuth.signInWithRedirect()`             | Fingerprint: `HostedUI`                            | Hosted UI provides OAuth-based sign-in with redirect support.                          | ✅         |
-| `FirebaseAuth.signInWithPhoneNumber()`          | Fingerprint: `InitiateAuth`                        | Phone-based authentication is supported via custom attributes.                        | ✅         |
-
----
-
-### **Action Code Handling**
-
-| Firebase Method                                  | Amazon Fingerprint Equivalent                      | Notes                                                                                  | Supported |
-|--------------------------------------------------|------------------------------------------------|---------------------------------------------------------------------------------------|-----------|
-| `FirebaseAuth.applyActionCode()`                 | Not Applicable                                 | Fingerprint does not use action codes.                                                    | ❌         |
-| `FirebaseAuth.checkActionCode()`                 | Not Applicable                                 | Fingerprint does not use action codes.                                                    | ❌         |
-| `FirebaseAuth.verifyPasswordResetCode()`         | Fingerprint: `AdminResetUserPassword`              | Password reset is handled via workflows, not codes.                                   | ✅         |
-
----
-
-### **Enterprise Features Unique to Amazon Fingerprint**
-
-| Feature                                          | Description                                                                            | Supported |
-|--------------------------------------------------|----------------------------------------------------------------------------------------|-----------|
-| User Pool Groups                                 | Organize users into groups for role-based access control.                              | ✅       |
-| Lambda Triggers                                  | Extend authentication workflows with serverless functions.                             | ✅       |
-| Hosted UI                                        | Simplify OAuth and federated login flows with pre-built UI.                            | ✅       |
-| Advanced Security Features                       | Detect anomalies and enforce adaptive authentication.                                  | ✅       |
-| Identity Federation                              | Support for third-party identity providers like Google, Facebook, and SAML.            | ✅       |
-
----
-
-## **Key Differences Between Firebase and Amazon Fingerprint**
-
-1. **Server-Side Capabilities:** Amazon Fingerprint provides robust server-side APIs (e.g., Admin APIs), while Firebase is primarily client-focused.
-2. **Enterprise Features:** Fingerprint supports advanced features like Lambda triggers and adaptive authentication, which are absent in Firebase.
-3. **Custom Token Support:** Firebase enables custom token generation for integration with external systems, while Fingerprint lacks this feature.
-
----
-
-## **Next Steps**
-
-1. Design the Dart SDK for server-side integration with Amazon Fingerprint Admin APIs.
-2. Implement key features such as user management, MFA, and token management.
-3. Provide documentation and examples to facilitate adoption for both mobile and web developers.
-
-Let me know if you'd like to explore specific areas further!
-
-
-
-
+| #  | Method                                                     | Supported |
+|----|------------------------------------------------------------|:---------:|
+| 1  | Authorization Methods with Flexible Options                | ✅        |
+| 2  | Search Query Functionality with Flexible Options           | ✅        |
+| 3  | Token Reference Operations with Flexible Options           | ✅        |
+| 4  | Token Issuance/Generation Method                           | ✅        |
+| 5  | Refresh Token Flow                                         | ✅        |
+| 6  | Reset Token Flow                                           | ✅        |
+| 7  | Journey Token Flow                                         | ✅        |
+| 8  | Send Magic Link Email Method                               | ✅        |
+| 9  | Authenticate Magic Link Method                             | ✅        |
+| 10 | Implement Send OTP Method                                  | ✅        |
+| 11 | Authenticate OTP Method                                    | ✅        |
+| 12 | Authenticate TOTP Method                                   | ✅        |
+| 13 | Start Transaction Signing TOTP                             | ✅        |
+| 14 | Authenticate Transaction Signing TOTP Method               | ✅        |
+| 15 | Register TOTP Method                                       | ✅        |
+| 16 | Revoke TOTP Method                                         | ✅        |
+| 17 | evoke TOTP Management Method                               | ✅        |
+| 18 | Authentication Start (WebAuthn) Method                     | ✅        |
+| 19 | Authenticate WebAuthn Credential Method                    | ✅        |
+| 20 | Hosted WebAuthn Registration Hint Method                   | ✅        |
+| 21 | WebAuthn Registration Start Method                         | ✅        |
+| 22 | WebAuthn Registration Method                               | ✅        |
+| 23 | WebAuthn Registration External Method                      | ✅        |
+| 24 | WebAuthn Cross Device Registration Start Method            | ✅        |
+| 25 | WebAuthn Cross Device Registration Init Method             | ✅        |
+| 26 | WebAuthn Cross Device External Registration Init Method    | ✅        |
+| 27 | WebAuthn Cross Device Registration Method                  | ✅        |
+| 28 | WebAuthn Cross Device Abort Method                         | ✅        |
+| 29 | WebAuthn Cross Device Status Method                        | ✅        |
+| 30 | WebAuthn Cross Device Attach Device Method                 | ✅        |
+| 31 | WebAuthn Cross Device Authentication Init Method           | ✅        |
+| 32 | WebAuthn Cross Device Authenticate Start Method            | ✅        |
+| 33 | Authenticate Native Mobile Biometrics Method               | ✅        |
+| 34 | Mobile Biometrics Registration Method                      | ✅        |
+| 35 | Implement Mobile Biometrics Deletion Method                | ✅        |
+| 36 | Implement Authenticate Password Method                     | ✅        |
+| 37 | Implement Authenticate Session Method                      | ✅        |
+| 38 | Implement Refresh Backend Auth Token Method                | ✅        |
+| 39 | Logout Backend Session Method                              | ✅        |
+| 40 | Implement Get User Sessions Method                         | ✅        |
+| 41 | Implement Revoke User Sessions Method                      | ✅        |
 
 ## Available Versions
 
-fingerprint Dart Admin Auth SDK is available in two versions to cater to different needs:
+Fingerprint Dart Auth SDK is available in two versions to cater to different needs:
 
 1. **Main - Stable Version**: Usually one release a month.  This version attempts to keep stability without introducing breaking changes.
-2. **Pre-Release - Edge Version**: Provided as an early indication of a release when breaking changes are expect.  This release is inconsistent. Use only if you are looking to test new features.
+2. **Sample Apps - FrontEnd Version**: The sample apps are provided in various frontend languages in order to allow maximum flexibility with your frontend implementation with the Dart backend.  Note that new features are first tested in the sample apps before being released in the mainline branch. Use only as a guide for your frontend/backend implementation of Dart.
 
 ## Documentation
 
-For detailed guides, API references, and example projects, visit our [fingerprint Dart Admin Auth SDK Documentation](https://aortem.gitbook.io/fingerprint-dart-auth-admin-sdk). Start building with  fingerprint Dart Admin Auth SDK today and take advantage of its robust features and elegant syntax.
+For detailed guides, API references, and example projects, visit our [Fingerprint Dart Auth SDK Documentation](https://sdks.aortem.io/transmit-dart-auth-sdk). Start building with  Fingerprint Dart Auth SDK today and take advantage of its robust features and elegant syntax.
 
 ## Examples
 
-Explore the `/example` directory in this repository to find sample applications demonstrating  fingerprint Dart Admin Auth SDK's capabilities in real-world scenarios.
+Explore the `/example` directory in this repository to find sample applications demonstrating  Fingerprint Dart Auth SDK's capabilities in real-world scenarios.
 
 ## Contributing
 
-We welcome contributions of all forms from the community! If you're interested in helping improve  fingerprint Dart Admin Auth SDK, please fork the repository and submit your pull requests. For more details, check out our [CONTRIBUTING.md](CONTRIBUTING.md) guide.  Our team will review your pull request. Once approved, we will integrate your changes into our primary repository and push the mirrored changes on the main github branch.
+We welcome contributions of all forms from the community! If you're interested in helping improve  Fingerprint Dart Auth SDK, please fork the repository and submit your pull requests. For more details, check out our [CONTRIBUTING.md](CONTRIBUTING.md) guide.  Our team will review your pull request. Once approved, we will integrate your changes into our primary repository and push the mirrored changes on the main github branch.
 
-## Support Tiers
+## Support
 
-fingerprint Dart Admin Auth SDK offers various support tiers for our open-source products with an Initial Response Service Level Agreement (IRSLA):
-
-### Community Support
-- **Cost**: Free
-- **Features**: Access to community forums, basic documentation.
-- **Ideal for**: Individual developers or small startups.
-- **SLA**: NA
-
-### Standard Support
-- **Cost**: $10/month - Billed Annually.
-- **Features**: Extended documentation, email support, 10 business days response SLA.
-- **Ideal for**: Growing startups and small businesses.
-- **SLA**: 10 business days (Monday-Friday) IRSLANA
-- [Subscribe-Coming Soon]()
-
-### Enhanced Support
-- **Cost**: $100/month - Billed Annually
-- **Features**: Access to roadmap, 72-hour response SLA, feature request prioritization.
-- **Ideal for**: Medium-sized enterprises requiring frequent support.
-- **SLA**: 5 business days IRSLA
-- [Subscribe-Coming Soon]()
-
-### Enterprise Support
-- **Cost**: 450/month
-- **Features**: 
-  - 48-hour response SLA, 
-  - Access to beta features:
-  - Comprehensive support for all Aortem Open Source products.
-  - Premium access to our exclusive enterprise customer forum.
-  - Early access to cutting-edge features.
-  - Exclusive access to Partner/Reseller/Channel Program..
-- **Ideal for**: Large organizations and enterprises with complex needs.
-- **SLA**: 48-hour IRSLA
-- [Subscribe-Coming Soon]()
-
-*Enterprise Support is designed for businesses, agencies, and partners seeking top-tier support across a wide range of Dart backend and server-side projects.  All Open Source projects that are part of the Aortem Collective are included in the Enterprise subscription, with more projects being added soon.
+For support across all Aortem open-source products, including this SDK, visit our [Support Page](https://aortem.io/support).
 
 ## Licensing
 
-All  fingerprint Dart Admin Auth SDK packages are licensed under BSD-3, except for the *services packages*, which uses the ELv2 license, which are licensed from third party software  Inc. In short, this means that you can, without limitation, use any of the client packages in your app as long as you do not offer the SDK's or services as a cloud service to 3rd parties (this is typically only relevant for cloud service providers).  See the [LICENSE](LICENSE.md) file for more details.
+The **Fingerprint Dart Auth SDK** is licensed under a dual-license approach:
 
+1. **BSD-3 License**:
+   - Applies to all packages and libraries in the SDK.
+   - Allows use, modification, and redistribution, provided that credit is given and compliance with the BSD-3 terms is maintained.
+   - Permits usage in open-source projects, applications, and private deployments.
 
-## Enhance with fingerprint Dart Admin Auth SDK
+2. **Enhanced License Version 2 (ELv2)**:
+   - Applies to all use cases where the SDK or its derivatives are offered as part of a **cloud service**.
+   - This ensures that the SDK cannot be directly used by cloud providers to offer competing services without explicit permission.
+   - Example restricted use cases:
+     - Including the SDK in a hosted SaaS authentication platform.
+     - Offering the SDK as a component of a managed cloud service.
 
-We hope the fingerprint Dart Admin Auth SDK helps you to efficiently build and scale your server-side applications. Join our growing community and start contributing to the ecosystem today!  test
+### **Summary**
+- You are free to use the SDK in your applications, including open-source and commercial projects, as long as the SDK is not directly offered as part of a third-party cloud service.
+- For details, refer to the [LICENSE](LICENSE.md) file.
+
+## Enhance with Fingerprint Dart Auth SDK
+
+We hope the Fingerprint Dart Auth SDK helps you to efficiently build and scale your server-side applications. Join our growing community and start contributing to the ecosystem today!

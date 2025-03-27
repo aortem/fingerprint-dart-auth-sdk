@@ -1,5 +1,7 @@
 # Add your own git ignore rules.
 
+**/build/
+
 # Ignore Flutter plugin files in example project
 /fingerprint_dart_auth_sdk/example/fingerprint_dart_auth_sdk-sample-app/.flutter-plugins
 /fingerprint_dart_auth_sdk/example/fingerprint_dart_auth_sdk-sample-app/.flutter-plugins-dependencies

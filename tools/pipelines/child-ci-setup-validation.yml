@@ -1,4 +1,4 @@
-flutterstages:
+stages:
   - validate
   - analyze
 
@@ -6,13 +6,23 @@ flutterstages:
 debug_merge_request:
   stage: validate
   script:
-    - echo "Debugging merge request..."
-    - echo "CI_COMMIT_BRANCH $CI_COMMIT_BRANCH"
-    - echo "CI_MERGE_REQUEST_SOURCE_BRANCH_NAME $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
-    - echo "CI_COMMIT_REF_NAME $CI_COMMIT_REF_NAME"
+    - echo "Basic Merge Request Variables..." 
+    - echo "CI_MERGE_REQUEST_IID is '$CI_MERGE_REQUEST_IID'"
+    - echo "CI_MERGE_REQUEST_SOURCE_BRANCH_NAME is $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"
+    - echo "CI_MERGE_REQUEST_TARGET_BRANCH_NAME is $CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
+    - echo "CI_MERGE_REQUEST_EVENT_TYPE is $CI_MERGE_REQUEST_EVENT_TYPE"
+    
+    - echo "Commit Information Variables..."
+    - echo "CI_COMMIT_REF_NAME is $CI_COMMIT_REF_NAME"
+    - echo "CI_COMMIT_BRANCH is $CI_COMMIT_BRANCH"
+    - echo "CI_COMMIT_MESSAGE is $CI_COMMIT_MESSAGE" 
+
     - echo "Determining branch name..."
     - BRANCH_NAME=${CI_COMMIT_BRANCH:-${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-$CI_COMMIT_REF_NAME}}
     - echo "Branch name determined $BRANCH_NAME"
+
+    - echo "Pipeline Metadata..."
+    - echo "CI_PIPELINE_SOURCE is $CI_PIPELINE_SOURCE"
 
 
 validate_branch_name:
@@ -54,8 +64,9 @@ validate_commit_messages:
         COMBINED_REGEX="($MERGE_REGEX|$REGEX)"
       else
         echo "Standard pipeline detected. Enforcing strict commit message validation..."
+        MERGE_REGEX="^Merge branch '[a-zA-Z0-9/_-]+' into '$TARGET_BRANCHES'$"
         REGEX="^(feat|fix|hotfix|chore|test|refactor|release)(\([a-z0-9_-]+\))?: .{1,72}$"
-        COMBINED_REGEX="$REGEX"
+        COMBINED_REGEX="($MERGE_REGEX|$REGEX)"
       fi
 
       # Validate the last commit message
@@ -85,7 +96,7 @@ validate_dart_sdk_version:
   script:
     - echo "Validating Dart SDK versions in all pubspec.yaml files..."
     - apk add --no-cache grep
-    - cd fingerprint_dart_auth_sdk
+    - cd fingerprint-dart-auth-sdk
 
     # Find all pubspec.yaml files (recursively, all levels)
     - PUBSPEC_FILES=$(find . -name "pubspec.yaml")
@@ -139,7 +150,7 @@ analyze_main:
     - validate_commit_messages
   script:
     - echo "Analyzing main project..."
-    - cd fingerprint_dart_auth_sdk
+    - cd fingerprint-dart-auth-sdk
     - dart pub get || { echo "Failed to install dependencies. Exiting..."; exit 1; }
     - dart analyze lib/ > analysis_report.txt 2> error_log.txt || true
 
@@ -176,9 +187,9 @@ analyze_main:
     - echo "Main project analysis complete. Check categorized issue files for details."
   artifacts:
     paths:
-      - fingerprint_dart_auth_sdk/info_issues.txt
-      - fingerprint_dart_auth_sdk/warning_issues.txt
-      - fingerprint_dart_auth_sdk/error_issues.txt
+      - fingerprint-dart-auth-sdk/info_issues.txt
+      - fingerprint-dart-auth-sdk/warning_issues.txt
+      - fingerprint-dart-auth-sdk/error_issues.txt
     expire_in: 1h
   rules:
    - when: always

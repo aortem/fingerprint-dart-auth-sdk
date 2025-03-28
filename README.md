@@ -8,12 +8,12 @@
 <!-- x-hide-in-docs-end -->
 <p align="center" class="github-badges">
   <!-- GitHub Tag Badge -->
-  <a href="https://github.com/aortem/Fingerprint-dart-auth-sdk/tags">
-    <img alt="GitHub Tag" src="https://img.shields.io/github/v/tag/aortem/transmit-dart-auth-sdk?style=for-the-badge" />
+  <a href="https://github.com/aortem/fingerprint-dart-auth-sdk/tags">
+    <img alt="GitHub Tag" src="https://img.shields.io/github/v/tag/aortem/fingerprint-dart-auth-sdk?style=for-the-badge" />
   </a>
   <!-- Dart-Specific Badges -->
-  <a href="https://pub.dev/packages/transmit_dart_auth_sdk">
-    <img alt="Pub Version" src="https://img.shields.io/pub/v/transmit_dart_auth_sdk.svg?style=for-the-badge" />
+  <a href="https://pub.dev/packages/fingerprint_dart_auth_sdk">
+    <img alt="Pub Version" src="https://img.shields.io/pub/v/fingerprint_dart_auth_sdk.svg?style=for-the-badge" />
   </a>
   <a href="https://dart.dev/">
     <img alt="Built with Dart" src="https://img.shields.io/badge/Built%20with-Dart-blue.svg?style=for-the-badge" />
@@ -69,7 +69,7 @@ Fingerprint Dart Auth SDK is available in two versions to cater to different nee
 
 ## Documentation
 
-For detailed guides, API references, and example projects, visit our [Fingerprint Dart Auth SDK Documentation](https://sdks.aortem.io/transmit-dart-auth-sdk). Start building with  Fingerprint Dart Auth SDK today and take advantage of its robust features and elegant syntax.
+For detailed guides, API references, and example projects, visit our [Fingerprint Dart Auth SDK Documentation](https://sdks.aortem.io/fingerprint-dart-auth-sdk). Start building with  Fingerprint Dart Auth SDK today and take advantage of its robust features and elegant syntax.
 
 ## Examples
 

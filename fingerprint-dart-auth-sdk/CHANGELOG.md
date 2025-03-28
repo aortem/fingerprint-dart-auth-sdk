@@ -1,6 +1,6 @@
 ## 0.0.1-pre+1
 
-- Add All Methods.
+- Add All Methods
 - Cleanup Repo
 
 ## 0.0.1-pre

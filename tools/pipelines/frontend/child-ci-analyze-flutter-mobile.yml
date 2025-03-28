@@ -6,7 +6,7 @@ analyze_flutter_mobile:
   image: ghcr.io/cirruslabs/flutter:stable
   script:
     - echo "Analyzing example project..."
-    - cd fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-sample-app
+    - cd fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-flutter-mobile-app
     - flutter pub get || { echo "Failed to install dependencies. Exiting..."; exit 1; }
     - dart analyze > analysis_report.txt 2> error_log.txt || true
 
@@ -46,7 +46,7 @@ analyze_flutter_mobile:
 
   artifacts:
     paths:
-      - fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-sample-app/info_issues.txt
-      - fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-sample-app/warning_issues.txt
-      - fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-sample-app/error_issues.txt
+      - fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-flutter-mobile-app/info_issues.txt
+      - fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-flutter-mobile-app/warning_issues.txt
+      - fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-flutter-mobile-app/error_issues.txt
     expire_in: 1h

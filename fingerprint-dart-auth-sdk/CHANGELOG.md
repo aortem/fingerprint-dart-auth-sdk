@@ -1,3 +1,8 @@
+## 0.0.1-pre+2
+
+- Add All Methods
+- Cleanup Repo
+
 ## 0.0.1-pre+1
 
 - Add All Methods

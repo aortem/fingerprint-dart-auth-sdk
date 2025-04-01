@@ -6,4 +6,4 @@
 
 # Ignore Dart clocal build tools
 .dart_tool/
-pubspec.lock
+**/pubspec.lock

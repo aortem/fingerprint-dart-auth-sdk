@@ -1,9 +1,9 @@
 # Global Repo Rules
 
 # Ignore all IDE settings
-.idea/
-.vscode/
+**/.idea/
+**/.vscode/
 
 # Ignore Dart clocal build tools
-.dart_tool/
+**/.dart_tool/
 **/pubspec.lock

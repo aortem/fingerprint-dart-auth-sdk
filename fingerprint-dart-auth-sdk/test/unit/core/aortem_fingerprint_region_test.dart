@@ -21,7 +21,9 @@ void main() {
 
     test('should throw an error for invalid name', () {
       expect(
-          () => Region.values.byName('invalid'), throwsA(isA<ArgumentError>()));
+        () => Region.values.byName('invalid'),
+        throwsA(isA<ArgumentError>()),
+      );
     });
   });
 }

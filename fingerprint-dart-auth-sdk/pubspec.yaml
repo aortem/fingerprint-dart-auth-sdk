@@ -2,9 +2,10 @@ name: fingerprint_dart_auth_sdk
 description: A Dart SDK for Fingerprint Authentication, enabling secure server-side authentication and user management for Dart-based backend applications.
 version: 0.0.1-pre+2
 repository: https://github.com/aortem/fingerprint_dart_auth_sdk
+license: BSD-3
 
 environment:
-  sdk: ^3.7.2
+  sdk: ^3.8.1
 
 # Add regular dependencies here.
 
@@ -12,7 +13,7 @@ dependencies:
 #------------------ STANDARD FEATURES----------------------dart-----------
 ## There are three standard libraries.  Each one can be used with a different xxx 
 
-  ds_standard_features: ^0.0.1-pre+11 #Standard Dart Team Utilities For HTTP //Default
+  ds_standard_features: ^0.0.3 #Standard Dart Team Utilities For HTTP //Default
   build_web_compilers: ^4.0.11
   jwt_generator: ^0.0.3
 

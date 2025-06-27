@@ -1,4 +1,4 @@
-# firebase-dart-admin-sample-app
+# firebase-dart-sample-app
 
 ## Description
 

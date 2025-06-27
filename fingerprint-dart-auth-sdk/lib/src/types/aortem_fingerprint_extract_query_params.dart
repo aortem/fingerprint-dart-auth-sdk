@@ -1,4 +1,3 @@
-
 /// Represents query parameters for API requests in a structured format.
 class ExtractQueryParams {
   /// A map containing query parameters.
@@ -14,8 +13,10 @@ class ExtractQueryParams {
   /// Converts the parameters to a URL-encoded query string.
   String toQueryString() {
     return params.entries
-        .map((entry) =>
-            '${Uri.encodeComponent(entry.key)}=${Uri.encodeComponent(entry.value.toString())}')
+        .map(
+          (entry) =>
+              '${Uri.encodeComponent(entry.key)}=${Uri.encodeComponent(entry.value.toString())}',
+        )
         .join('&');
   }
 
@@ -33,8 +34,9 @@ class ExtractQueryParams {
       if (keyValue.length != 2) {
         throw FormatException('Invalid query string format.');
       }
-      parsedParams[Uri.decodeComponent(keyValue[0])] =
-          Uri.decodeComponent(keyValue[1]);
+      parsedParams[Uri.decodeComponent(keyValue[0])] = Uri.decodeComponent(
+        keyValue[1],
+      );
     }
 
     return ExtractQueryParams(params: parsedParams);

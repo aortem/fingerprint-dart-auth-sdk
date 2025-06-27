@@ -38,10 +38,6 @@ class DefaultWebhookSignatureParams implements IsValidWebhookSignatureParams {
 
   /// Converts the object into a JSON representation.
   Map<String, dynamic> toJson() {
-    return {
-      'payload': payload,
-      'signature': signature,
-      'secret': secret,
-    };
+    return {'payload': payload, 'signature': signature, 'secret': secret};
   }
 }

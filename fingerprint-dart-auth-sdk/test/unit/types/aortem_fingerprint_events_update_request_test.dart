@@ -55,11 +55,13 @@ void main() {
 
     test('should throw error for missing required fields in JSON', () {
       final invalidJson = {
-        'updates': {'status': 'processed'}
+        'updates': {'status': 'processed'},
       }; // Missing 'eventId'
 
       expect(
-          () => EventsUpdateRequest.fromJson(invalidJson), throwsArgumentError);
+        () => EventsUpdateRequest.fromJson(invalidJson),
+        throwsArgumentError,
+      );
     });
   });
 }

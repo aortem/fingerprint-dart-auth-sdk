@@ -29,11 +29,7 @@ class ErrorPlainResponse {
 
   /// Converts the object into a JSON representation.
   Map<String, dynamic> toJson() {
-    return {
-      'status': status,
-      'error': error,
-      'message': message,
-    };
+    return {'status': status, 'error': error, 'message': message};
   }
 
   /// Returns a string representation of the error response.

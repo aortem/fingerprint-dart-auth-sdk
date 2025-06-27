@@ -10,22 +10,23 @@ void main() {
     });
 
     test('should throw ArgumentError when id is empty', () {
-      expect(() => DefaultDecryptionKey(id: '', key: 'my-secret-key'),
-          throwsA(isA<ArgumentError>()));
+      expect(
+        () => DefaultDecryptionKey(id: '', key: 'my-secret-key'),
+        throwsA(isA<ArgumentError>()),
+      );
     });
 
     test('should throw ArgumentError when key is empty', () {
-      expect(() => DefaultDecryptionKey(id: '12345', key: ''),
-          throwsA(isA<ArgumentError>()));
+      expect(
+        () => DefaultDecryptionKey(id: '12345', key: ''),
+        throwsA(isA<ArgumentError>()),
+      );
     });
 
     test('should convert to JSON correctly', () {
       final key = DefaultDecryptionKey(id: '12345', key: 'my-secret-key');
       final json = key.toJson();
-      expect(json, {
-        'id': '12345',
-        'key': 'my-secret-key',
-      });
+      expect(json, {'id': '12345', 'key': 'my-secret-key'});
     });
   });
 }

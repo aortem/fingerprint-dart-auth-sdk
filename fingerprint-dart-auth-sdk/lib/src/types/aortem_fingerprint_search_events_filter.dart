@@ -46,8 +46,14 @@ class SearchEventsFilter {
       query: json['query'] as String?,
       from: json['from'] as String?,
       to: json['to'] as String?,
-      limit: json['limit'] is int ? json['limit'] as int : int.tryParse(json['limit'].toString()),
-      offset: json['offset'] is int ? json['offset'] as int : int.tryParse(json['offset'].toString()),
+      limit:
+          json['limit'] is int
+              ? json['limit'] as int
+              : int.tryParse(json['limit'].toString()),
+      offset:
+          json['offset'] is int
+              ? json['offset'] as int
+              : int.tryParse(json['offset'].toString()),
       sort: json['sort'] as String?,
     );
   }

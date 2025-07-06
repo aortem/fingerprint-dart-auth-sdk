@@ -21,7 +21,7 @@ dependencies:
 #------------------ TESTING FEATURES---------------------------------
 
 dev_dependencies:
-  ds_tools_testing: ^0.0.4#Standard Dart Team Testing Tools
+  ds_tools_testing: ^0.0.4 #Standard Dart Team Testing Tools
   git_hooks: any
 
 # Optional Local Hooks for development.

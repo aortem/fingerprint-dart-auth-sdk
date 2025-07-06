@@ -35,13 +35,13 @@ validate_branch_name:
 
       if echo "$BRANCH_NAME" | grep -Eq "^(development|qa|beta|main)$"; then
         echo "✅ Valid branch name for protected branches: $BRANCH_NAME."
-      elif echo "$BRANCH_NAME" | grep -Eq "^(feat|fix|hotfix|chore|test|refactor|release|docs)/[a-z0-9_-]+$"; then
+      elif echo "$BRANCH_NAME" | grep -Eq "^(feat|fix|hotfix|chore|test|refactor|release)/[a-z0-9_-]+$"; then
         echo "✅ Branch name follows naming convention: $BRANCH_NAME."
       elif echo "$BRANCH_NAME" | grep -Eq "^[0-9]+\.[0-9]+\.[0-9]+(-[a-z0-9_-]+)?(\+[0-9]+)?$"; then
-        echo "✅ Valid release branch name: $BRANCH_NAME."
+        echo "✅ Valid release branch name: $BRANCH_NAME."  
       else
         echo "❌ Invalid branch name: $BRANCH_NAME."
-        echo "Expected format: <type>/<branch-name>. Valid types: feat, fix, hotfix, chore, test, refactor, release, docs, development, qa, beta, main."
+        echo "Expected format: <type>/<branch-name>. Valid types: feat, fix, hotfix, chore, test, refactor, release, development, qa, beta, main."
         exit 1
       fi
   rules:
@@ -60,12 +60,12 @@ validate_commit_messages:
       if [ -n "$CI_MERGE_REQUEST_IID" ]; then
         echo "Merge request detected. Allowing merge commit messages..."
         MERGE_REGEX="^Merge branch '[a-zA-Z0-9/_-]+' into '$TARGET_BRANCHES'$"
-        REGEX="^(feat|fix|hotfix|chore|test|refactor|release|docs)(\([a-z0-9_-]+\))?: .{1,72}$"
+        REGEX="^(feat|fix|hotfix|chore|test|refactor|release)(\([a-z0-9_-]+\))?: .{1,72}$"
         COMBINED_REGEX="($MERGE_REGEX|$REGEX)"
       else
         echo "Standard pipeline detected. Enforcing strict commit message validation..."
         MERGE_REGEX="^Merge branch '[a-zA-Z0-9/_-]+' into '$TARGET_BRANCHES'$"
-        REGEX="^(feat|fix|hotfix|chore|test|refactor|release|docs)(\([a-z0-9_-]+\))?: .{1,72}$"
+        REGEX="^(feat|fix|hotfix|chore|test|refactor|release)(\([a-z0-9_-]+\))?: .{1,72}$"
         COMBINED_REGEX="($MERGE_REGEX|$REGEX)"
       fi
 
@@ -96,7 +96,7 @@ validate_dart_sdk_version:
   script:
     - echo "Validating Dart SDK versions in all pubspec.yaml files..."
     - apk add --no-cache grep
-    - cd fingerprint-dart-auth-sdk
+    - cd entra-id-dart-auth-sdk
 
     # Find all pubspec.yaml files (recursively, all levels)
     - PUBSPEC_FILES=$(find . -name "pubspec.yaml")
@@ -104,7 +104,7 @@ validate_dart_sdk_version:
     - echo "$PUBSPEC_FILES"
 
     # Define the minimum required Dart SDK version
-    - MINIMUM_VERSION="3.7.3"
+    - MINIMUM_VERSION="3.8.1"
     - ALL_VALID="true"
 
     # Iterate over each pubspec.yaml file
@@ -113,11 +113,7 @@ validate_dart_sdk_version:
         echo "Checking $PUBSPEC..."
 
         # Extract the Dart SDK version
-        SDK_VERSION=$( sed -n \
-        's/^[[:space:]]*sdk:[[:space:]]*\^\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p' \
-        "$PUBSPEC" \
-        | head -n1 )
-        [ -z "$SDK_VERSION" ] && SDK_VERSION="not_found"
+        SDK_VERSION=$(grep -Po '(?<=sdk:\s\^)[0-9]+\.[0-9]+\.[0-9]+' "$PUBSPEC" || echo "not_found")
         echo "Extracted Dart SDK version from $PUBSPEC: $SDK_VERSION"
 
         # Validate the extracted version
@@ -154,7 +150,7 @@ analyze_main:
     - validate_commit_messages
   script:
     - echo "Analyzing main project..."
-    - cd fingerprint-dart-auth-sdk
+    - cd entra-id-dart-auth-sdk
     - dart pub get || { echo "Failed to install dependencies. Exiting..."; exit 1; }
     - dart analyze lib/ > analysis_report.txt 2> error_log.txt || true
 
@@ -191,9 +187,9 @@ analyze_main:
     - echo "Main project analysis complete. Check categorized issue files for details."
   artifacts:
     paths:
-      - fingerprint-dart-auth-sdk/info_issues.txt
-      - fingerprint-dart-auth-sdk/warning_issues.txt
-      - fingerprint-dart-auth-sdk/error_issues.txt
+      - entra-id-dart-auth-sdk/info_issues.txt
+      - entra-id-dart-auth-sdk/warning_issues.txt
+      - entra-id-dart-auth-sdk/error_issues.txt
     expire_in: 1h
   rules:
    - when: always

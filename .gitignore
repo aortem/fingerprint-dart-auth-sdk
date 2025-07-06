@@ -1,5 +1,8 @@
 # Global Repo Rules
 
+# Env
+**/*.env
+
 # Ignore all IDE settings
 **/.idea/
 **/.vscode/

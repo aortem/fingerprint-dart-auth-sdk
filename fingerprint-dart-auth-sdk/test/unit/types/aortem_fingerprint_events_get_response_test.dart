@@ -11,10 +11,10 @@ void main() {
           {
             'id': 'event_123',
             'timestamp': '2025-03-13T12:00:00Z',
-            'details': {'key': 'value'}
-          }
+            'details': {'key': 'value'},
+          },
         ],
-        'meta': {'count': 1, 'page': 1, 'limit': 10}
+        'meta': {'count': 1, 'page': 1, 'limit': 10},
       };
 
       final response = EventsGetResponse.fromJson(jsonData);
@@ -55,7 +55,9 @@ void main() {
       final invalidJson = {'events': []}; // Missing 'meta' key
 
       expect(
-          () => EventsGetResponse.fromJson(invalidJson), throwsArgumentError);
+        () => EventsGetResponse.fromJson(invalidJson),
+        throwsArgumentError,
+      );
     });
   });
 }

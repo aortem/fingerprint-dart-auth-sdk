@@ -14,7 +14,10 @@ String getRequestPath(String basePath, [Map<String, dynamic>? queryParams]) {
   }
 
   final encodedQueryParams = queryParams.entries
-      .map((e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
+      .map(
+        (e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}',
+      )
       .join('&');
 
   return '$basePath?$encodedQueryParams';

@@ -48,10 +48,11 @@ class RelatedVisitorsFilter {
 
   /// Converts this filter to a URL query string.
   String toQueryString() {
-    final params = toJson()
-        .entries
-        .map((e) =>
-            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}')
+    final params = toJson().entries
+        .map(
+          (e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}',
+        )
         .join('&');
     return params.isNotEmpty ? '?$params' : '';
   }

@@ -1,132 +1,191 @@
-# Magic Dart Auth SDK
+# Fingerprint Dart Auth SDK
 
 ## Overview
 
-The Magic Dart Auth SDK offers a robust and flexible set of tools to perform authentication procedures within Dart or Flutter projects. This is a Dart implementation of Fingerprint Authentication.
+The **Fingerprint Dart Auth SDK** provides a unified API for biometric (fingerprint/face) authentication across Flutter mobile, desktop, and server-side Dart environments. With this SDK you can:
 
-## Features:
+* Prompt the user for biometric verification (fingerprint, face ID)  
+* Fall back to PIN or passcode if biometrics aren’t available or fail  
+* Securely cache and verify session tokens post-authentication  
+* Integrate with platform keystores (Android Keystore, iOS Keychain, Windows Hello)  
+* Customize prompts, timeouts, and retry logic  
 
-- **User Management:** Manage user accounts seamlessly with a suite of comprehensive user management functionalities.
-- **Custom Token Minting:** Integrate Fingerprint authentication with your backend services by generating custom tokens.
-- **Generating Email Action Links:** Perform authentication by creating and sending email action links to users emails for email verification, password reset, etc.
-- **ID Token verification:** Verify ID tokens securely to ensure that application users are authenticated and authorised to use app.
-- **Managing SAML/OIDC Provider Configuration**: Manage and configure SAML and ODIC providers to support authentication and simple sign-on solutions.
+Whether you’re building a Flutter mobile app, a desktop client, or a Dart server that needs to verify device possession, this SDK makes adding biometric security seamless.
+
+---
+
+## Features
+
+* **Cross-Platform Biometric API**  
+  - Fingerprint, Touch ID, Face ID on mobile/desktop  
+  - Automatic detection of available modalities  
+
+* **PIN/Passcode Fallback**  
+  - Configurable fallback to a numeric PIN or device passcode  
+  - Pluggable storage for PIN verification  
+
+* **Secure Token Handling**  
+  - Encrypt and cache session tokens in platform keystores  
+  - Automatic expiry checks and forced re-authentication  
+
+* **Customizable UX**  
+  - Override default prompt titles, subtitles, and error messages  
+  - Control timeout, maximum retries, and UI styling  
+
+* **Server-Side Verification**  
+  - Challenge/response flows for headless Dart services  
+  - Validate client-provided biometric proof via signed tokens  
+
+* **Extensible Storage**  
+  - Default implementations for file, in-memory, and keystore backends  
+  - Implement your own `SecureStorage` for database or cloud caching  
+
+---
 
 ## Getting Started
 
-If you want to use the Magic Dart Auth SDK for implementing a Fingerprint authentication in your Flutter projects follow the instructions on how to set up the auth SDK.
+### 1. Prerequisites
 
-- Ensure you have a Flutter or Dart (3.4.x) SDK installed in your system.
-- Set up a Fingerprint project and service account.
-- Set up a Flutter project.
+* Flutter ≥ 2.10 (with `local_auth` plugin) or Dart ≥ 2.14  
+* An Android or iOS device/emulator with biometrics enabled (for mobile)  
+* Windows 10+ with Windows Hello (for desktop)  
+
+### 2. Configure Your App
+
+#### Flutter
+
+1. Add the `local_auth` plugin and enable biometrics in your `AndroidManifest.xml` and `Info.plist`.  
+2. Ensure your app has the appropriate entitlements for Face ID / Touch ID on iOS.
+
+#### Dart Server
+
+- No special platform setup; you’ll issue and verify signed tokens based on client assertions.
+
+---
 
 ## Installation
 
-For Flutter use:
+Add the SDK to your project:
 
-```javascript
+```bash
+# Dart:
+dart pub add fingerprint_dart_auth_sdk
+
+# Flutter:
 flutter pub add fingerprint_dart_auth_sdk
-```
+````
 
-You can manually edit your `pubspec.yaml `file this:
+Or manually in your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  fingerprint_dart_auth_sdk: ^0.0.1-pre+2
+  fingerprint_dart_auth_sdk: ^0.0.1
 ```
 
-You can run a `flutter pub get` for Flutter respectively to complete installation.
+Then fetch:
 
-**NB:** SDK version might vary.
+```bash
+dart pub get
+```
+
+---
 
 ## Usage
 
-**Example:**
+### Initialize the SDK
 
-```
-import 'dart:io';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:fingerprint/screens/splash_screen/splash_screen.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+```dart
 import 'package:fingerprint_dart_auth_sdk/fingerprint_dart_auth_sdk.dart';
-import 'package:flutter/services.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  try {
-    if (kIsWeb) {
-      // Initialize for web
-      debugPrint('Initializing fingerprint for Web...');
-      fingerprintApp.initializeAppWithEnvironmentVariables(
-        apiKey: 'YOUR-API-KEY',
-        projectId: 'YOUR-PROJECT-ID',
-        bucketName: 'Your Bucket Name',
-      );
-      debugPrint('fingerprint initialized for Web.');
-    } else {
-      if (Platform.isAndroid || Platform.isIOS) {
-        debugPrint('Initializing fingerprint for Mobile...');
-
-        // Load the service account JSON
-        String serviceAccountContent = await rootBundle.loadString(
-          'assets/service_account.json',
-        );
-        debugPrint('Service account loaded.');
-
-        // Initialize fingerprint with the service account content
-        await fingerprintApp.initializeAppWithServiceAccount(
-          serviceAccountContent: serviceAccountContent,
-        );
-        debugPrint('fingerprint initialized for Mobile.');
-      }
-    }
-
-    // Access fingerprint Auth instance
-    final auth = fingerprintApp.instance.getAuth();
-    debugPrint('fingerprint Auth instance obtained.');
-
-    runApp(const MyApp());
-  } catch (e, stackTrace) {
-    debugPrint('Error initializing fingerprint: $e');
-    debugPrint('StackTrace: $stackTrace');
-  }
+  final auth = FingerprintAuth(
+    storage: SecureKeychainStorage(),   // or FileStorage(), MemoryStorage()
+    promptConfig: PromptConfig(
+      title: 'Verify your identity',
+      subtitle: 'Use fingerprint or passcode',
+      timeoutSeconds: 30,
+      maxRetries: 3,
+    ),
+  );
 }
-
 ```
 
-- Import the package into your Dart or Flutter project:
+### Authenticate with Biometrics
+
+```dart
+final result = await auth.authenticate();
+
+// result.isSuccess == true if fingerprint (or face) verified
+if (result.isSuccess) {
+  // Issue your session token
+  final token = await auth.issueSessionToken(userId: 'alice');
+} else {
+  print('Authentication failed or cancelled: ${result.errorMessage}');
+}
+```
+
+### PIN/Passcode Fallback
+
+```dart
+// If biometrics unavailable, fallback to PIN
+final pinResult = await auth.authenticateWithPin(
+  pinValidator: (pin) => pin == '1234',
+);
+
+if (pinResult.isSuccess) {
+  // PIN accepted
+}
+```
+
+### Silent Token Refresh
+
+```dart
+// Checks stored session token, re-authenticates if expired
+final session = await auth.getSession();
+if (!session.isValid) {
+  await auth.authenticate(); // triggers biometric or PIN again
+}
+```
+
+---
+
+## Advanced
+
+* **Custom Storage**
+
+  ```dart
+  class MySecureDbStorage implements SecureStorage {
+    // implement saveToken, loadToken, clearToken
+  }
+
+  auth.setStorage(MySecureDbStorage());
   ```
-  import 'package:fingerprint_dart_auth_sdk/fingerprint_dart_auth_sdk.dart';
-  ```
-  For Flutter web initialize fingerprint app as follows:
-  ```
-  fingerprintApp.initializeAppWithEnvironmentVariables(
-    apiKey: 'YOUR-API-KEY',
-    projectId: 'YOUR-PROJECT-ID',
-    bucketName: 'Your Bucket Name',
+
+* **Server-Side Verification**
+
+  ```dart
+  // Verify a client’s signed biometric assertion
+  final isValid = await auth.verifyBiometricProof(
+    assertionJwt: clientJwt,
+    publicKey: myPublicKey,
   );
   ```
 
-- For Flutter mobile:
-    - Load the service account JSON
-    ```
-       String serviceAccountContent = await rootBundle.loadString(
-         'assets/service_account.json',
-       );
-    ```
-    - Initialize Flutter mobile with service account content
-    ```
-      await fingerprintApp.initializeAppWithServiceAccount(
-        serviceAccountContent: serviceAccountContent,
-      );
-    ```
+* **UI Styling**
 
-- Access Fingerprint Auth instance.
+  ```dart
+  auth.promptConfig = auth.promptConfig.copyWith(
+    subtitle: 'Touch the sensor or enter your PIN',
+    analyticsEnabled: true,
+  );
   ```
-     final auth = FingerprintApp.instance.getAuth();
-  ```
+
+---
+
 ## Documentation
 
-For more refer to Gitbook for prelease [documentation here](https://aortem.gitbook.io/fingerprint-dart-auth-admin-sdk/).
+For full API reference, examples, and troubleshooting, see our GitBook:
+
+👉 [Fingerprint Dart Auth SDK Docs](https://aortem.gitbook.io/fingerprint-dart-auth-sdk/)
+
+```

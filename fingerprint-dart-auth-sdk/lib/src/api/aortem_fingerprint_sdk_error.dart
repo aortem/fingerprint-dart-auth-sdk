@@ -12,11 +12,7 @@ class SdkError implements Exception {
   final dynamic details;
 
   /// Creates an instance of [SdkError].
-  SdkError({
-    required this.message,
-    this.code,
-    this.details,
-  });
+  SdkError({required this.message, this.code, this.details});
 
   @override
   String toString() {

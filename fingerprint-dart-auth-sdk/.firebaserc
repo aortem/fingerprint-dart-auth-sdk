@@ -1,5 +1,5 @@
 {
   "projects": {
-    "default": "fire-base-dart-admin-auth-sdk"
+    "default": "fire-base-dart-auth-sdk"
   }
 }

@@ -39,7 +39,9 @@ class DefaultErrorResponse implements ErrorResponse {
 
   /// Factory constructor to create an instance from a JSON object.
   factory DefaultErrorResponse.fromJson(Map<String, dynamic> json) {
-    if (!json.containsKey('status') || !json.containsKey('error') || !json.containsKey('message')) {
+    if (!json.containsKey('status') ||
+        !json.containsKey('error') ||
+        !json.containsKey('message')) {
       throw ArgumentError('Missing required error response fields.');
     }
 
@@ -52,10 +54,6 @@ class DefaultErrorResponse implements ErrorResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return {
-      'status': status,
-      'error': error,
-      'message': message,
-    };
+    return {'status': status, 'error': error, 'message': message};
   }
 }

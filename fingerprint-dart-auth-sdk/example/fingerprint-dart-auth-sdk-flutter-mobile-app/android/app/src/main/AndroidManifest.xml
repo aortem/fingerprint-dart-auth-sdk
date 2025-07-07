@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
-        android:label="firebase_dart_admin_auth_sample_app"
+        android:label="fingerprint_dart_auth_sample_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

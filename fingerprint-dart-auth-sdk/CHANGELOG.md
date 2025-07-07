@@ -2,26 +2,40 @@
 
 ### Added
 - **Global .gitignore**  
-  - Ignore Flutter/Dart build and tool files (`build/`, `.dart_tool/`, `.flutter-plugins*`) and IDE folders (`.idea/`, `.vscode/`).  
+  Added a `.gitignore` at the root of `fingerprint-dart-auth-sdk/` to ignore Flutter/Dart build artifacts (`build/`, `.dart_tool/`, `.flutter-plugins*`) and IDE folders (`.idea/`, `.vscode/`).
+
 - **Automated Release Workflow**  
-  - In CI scripts, configure Git user/email from `GITLAB_USERNAME`/`_GIT_USER` env-vars.  
-  - Set remote origin to include credentials for tagging.  
-  - Create and push annotated Git tags `v$VERSION`.  
-  - Extract release notes for this version from `CHANGELOG.md` via `awk`.  
-  - Publish a GitLab Release via the API (`curl … /releases`).
+  Introduced CI scripts under `fingerprint-dart-auth-sdk/ci/` (and corresponding GitLab-CI hooks) to:  
+  - Auto-configure Git user/email from `GITLAB_USERNAME`/`_GIT_USER` env-vars  
+  - Create and push annotated tags `v$VERSION`  
+  - Extract the release notes for this version from `CHANGELOG.md`  
+  - Publish a GitLab Release via the API
 
 ### Changed
+- **Example App Updates**  
+  - Renamed the sample-app README title:  
+    `firebase-dart-admin-sample-app` → `firebase-dart-sample-app`  
+  - Bumped the Dart SDK constraint in  
+    `example/fingerprint-dart-auth-sdk-flutter-mobile-app/pubspec.yaml` from `^3.7.2` to `^3.8.1`.  
+  - Updated Android config in  
+    `example/.../android/app/oldbuild.gradle` and  
+    `AndroidManifest.xml` to reflect the new bundle identifiers.  
+  - Tweaked Linux CMakeLists in the example for updated target names.
+
+- **Test Suite Polish**  
+  - Reformatted several `test/unit/api/…` and `test/unit/types/…` files for consistent trailing commas and single-line constructors.  
+  - Fixed JSON-instantiation in `aortem_fingerprint_events_update_request_test.dart` to throw on missing `eventId`.
+
 - **GitHub Issue Templates**  
-  - `.github/ISSUE_TEMPLATE/community-documentation.yml`: removed `ginjardev` from the assignees list.  
-  - `.github/ISSUE_TEMPLATE/config.yml`: updated rules and cleaned up deprecated entries.  
-- **CI Pipeline Cleanup**  
-  - Removed the legacy “collaboration” echo-loop (scanning `error_issues.txt`).  
-  - Deleted obsolete artifact paths (`info_issues.txt`, `warning_issues.txt`, `error_issues.txt`).  
-  - Dropped deprecated jobs: `unit_testing`, `analyze_sample_apps`, `analyze_example`, and `release`.
+  - In `.github/ISSUE_TEMPLATE/community-documentation.yml`, removed `ginjardev` from the default assignees.  
+  - Cleaned up deprecated fields in `.github/ISSUE_TEMPLATE/config.yml`.
 
 ### Removed
-- **Obsolete CI Jobs & Artifacts**  
-  - All references to the old sample-app analysis and artifact-gathering jobs have been purged from the pipeline.  
+- **Obsolete CI Artifacts & Jobs**  
+  - Deleted all references to `info_issues.txt`, `warning_issues.txt`, and `error_issues.txt` in the pipeline configs under `fingerprint-dart-auth-sdk/`.  
+  - Purged the deprecated `unit_testing`, `analyze_sample_apps`, and `release` jobs from the CI definition.
+
+
 
 ## 0.0.1-pre+2
 

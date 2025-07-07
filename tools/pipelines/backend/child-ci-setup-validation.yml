@@ -96,7 +96,7 @@ validate_dart_sdk_version:
   script:
     - echo "Validating Dart SDK versions in all pubspec.yaml files..."
     - apk add --no-cache grep
-    - cd entra-id-dart-auth-sdk
+    - cd fingerprint-dart-auth-sdk
 
     # Find all pubspec.yaml files (recursively, all levels)
     - PUBSPEC_FILES=$(find . -name "pubspec.yaml")
@@ -150,7 +150,7 @@ analyze_main:
     - validate_commit_messages
   script:
     - echo "Analyzing main project..."
-    - cd entra-id-dart-auth-sdk
+    - cd fingerprint-dart-auth-sdk
     - dart pub get || { echo "Failed to install dependencies. Exiting..."; exit 1; }
     - dart analyze lib/ > analysis_report.txt 2> error_log.txt || true
 
@@ -187,9 +187,9 @@ analyze_main:
     - echo "Main project analysis complete. Check categorized issue files for details."
   artifacts:
     paths:
-      - entra-id-dart-auth-sdk/info_issues.txt
-      - entra-id-dart-auth-sdk/warning_issues.txt
-      - entra-id-dart-auth-sdk/error_issues.txt
+      - fingerprint-dart-auth-sdk/info_issues.txt
+      - fingerprint-dart-auth-sdk/warning_issues.txt
+      - fingerprint-dart-auth-sdk/error_issues.txt
     expire_in: 1h
   rules:
    - when: always

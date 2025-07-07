@@ -27,7 +27,8 @@ class TooManyRequestsError implements RequestError {
 
   @override
   String toString() {
-    var errorString = 'TooManyRequestsError: $message (Status Code: $statusCode)';
+    var errorString =
+        'TooManyRequestsError: $message (Status Code: $statusCode)';
     if (retryAfter != null) {
       errorString += ' | Retry After: ${retryAfter!.inSeconds} seconds';
     }

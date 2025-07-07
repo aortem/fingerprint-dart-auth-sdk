@@ -1,6 +1,6 @@
 {
-  "name": "firebase_dart_admin_auth_sample_app",
-  "short_name": "firebase_dart_admin_auth_sample_app",
+  "name": "fingerprint_dart_auth_sample_app",
+  "short_name": "fingerprint_dart_auth_sample_app",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

@@ -29,9 +29,7 @@ void main() {
     });
 
     test('should correctly format toString() without errorData', () {
-      final error = UnsealError(
-        message: 'Invalid encryption format',
-      );
+      final error = UnsealError(message: 'Invalid encryption format');
 
       expect(
         error.toString(),

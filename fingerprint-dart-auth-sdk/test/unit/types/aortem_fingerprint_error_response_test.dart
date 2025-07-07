@@ -58,8 +58,10 @@ void main() {
       );
 
       final jsonString = errorResponse.toString();
-      expect(jsonString,
-          '{"status":403,"error":"forbidden","message":"You do not have permission"}');
+      expect(
+        jsonString,
+        '{"status":403,"error":"forbidden","message":"You do not have permission"}',
+      );
     });
   });
 }

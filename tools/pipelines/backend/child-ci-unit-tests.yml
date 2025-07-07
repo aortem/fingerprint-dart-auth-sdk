@@ -11,7 +11,7 @@ unit_tests:
     - dart pub get
     - dart test . --coverage=coverage --reporter expanded || echo "Some tests failed, proceeding with coverage upload..."
     - echo "Uploading coverage report to Codecov..."
-    - curl -s https://codecov.io/bash | bash -s -- -t $CODECOV_TOKEN -R github.com/aortem/transmit-dart-admin-auth-sdk -f coverage/lcov.info || echo "Coverage upload failed."
+    - curl -s https://codecov.io/bash | bash -s -- -t $CODECOV_TOKEN -R github.com/aortem/transmit-dart-auth-sdk -f coverage/lcov.info || echo "Coverage upload failed."
   artifacts:
     paths:
       - coverage/

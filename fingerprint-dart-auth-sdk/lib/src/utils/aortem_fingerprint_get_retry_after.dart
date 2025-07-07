@@ -22,7 +22,7 @@ Duration? getRetryAfter(Map<String, String> headers) {
   try {
     final retryAfterDate = HttpDate.parse(retryAfterValue);
     final now = DateTime.now().toUtc();
-    
+
     if (retryAfterDate.isAfter(now)) {
       return retryAfterDate.difference(now);
     }

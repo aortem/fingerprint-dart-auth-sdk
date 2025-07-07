@@ -17,10 +17,7 @@ void main() {
     });
 
     test('should allow creating an error without additional errorData', () {
-      final error = RequestError(
-        message: 'Not Found',
-        statusCode: 404,
-      );
+      final error = RequestError(message: 'Not Found', statusCode: 404);
 
       expect(error.message, equals('Not Found'));
       expect(error.statusCode, equals(404));
@@ -43,10 +40,7 @@ void main() {
     });
 
     test('should handle errorData being null gracefully', () {
-      final error = RequestError(
-        message: 'Bad Request',
-        statusCode: 400,
-      );
+      final error = RequestError(message: 'Bad Request', statusCode: 400);
 
       expect(
         error.toString(),

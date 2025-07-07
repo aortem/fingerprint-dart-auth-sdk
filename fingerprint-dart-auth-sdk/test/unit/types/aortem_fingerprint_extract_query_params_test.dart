@@ -6,8 +6,9 @@ import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_extract_q
 void main() {
   group('ExtractQueryParams', () {
     test('should create an instance with valid parameters', () {
-      final queryParams =
-          ExtractQueryParams(params: {'name': 'John', 'age': '25'});
+      final queryParams = ExtractQueryParams(
+        params: {'name': 'John', 'age': '25'},
+      );
 
       expect(queryParams.params, containsPair('name', 'John'));
       expect(queryParams.params, containsPair('age', '25'));
@@ -18,8 +19,9 @@ void main() {
     });
 
     test('should convert parameters to a query string correctly', () {
-      final queryParams =
-          ExtractQueryParams(params: {'name': 'John', 'age': '25'});
+      final queryParams = ExtractQueryParams(
+        params: {'name': 'John', 'age': '25'},
+      );
 
       final queryString = queryParams.toQueryString();
 
@@ -40,15 +42,20 @@ void main() {
     });
 
     test('should throw FormatException for malformed query string', () {
-      expect(() => ExtractQueryParams.fromQueryString('invalidQuery'),
-          throwsFormatException);
-      expect(() => ExtractQueryParams.fromQueryString('keyWithoutValue='),
-          throwsFormatException);
+      expect(
+        () => ExtractQueryParams.fromQueryString('invalidQuery'),
+        throwsFormatException,
+      );
+      expect(
+        () => ExtractQueryParams.fromQueryString('keyWithoutValue='),
+        throwsFormatException,
+      );
     });
 
     test('should correctly serialize to JSON', () {
-      final queryParams =
-          ExtractQueryParams(params: {'name': 'John', 'age': '25'});
+      final queryParams = ExtractQueryParams(
+        params: {'name': 'John', 'age': '25'},
+      );
 
       final json = queryParams.toJson();
 

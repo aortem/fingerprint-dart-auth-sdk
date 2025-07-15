@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
+import 'package:fingerprint_dart_auth_sdk/fingerprint_dart_auth_sdk.dart';
 
 import '../core/aortem_fingerprint_region.dart';
 import '../utils/aortem_fingerprint_get_integration_info.dart';
@@ -35,7 +36,12 @@ class FingerprintJsServerApiClient {
   }) : baseUrl = baseUrl ?? _getBaseUrl(region),
        client = client ?? http.Client() {
     if (apiKey.isEmpty) {
-      throw ArgumentError('API key must be provided.');
+      throw SdkError(
+        message: 'API key must be provided',
+        code: 'EMPTY_API_KEY',
+        details:
+            'Ensure that a valid API key is provided during SDK initialization.',
+      );
     }
   }
 
@@ -54,7 +60,11 @@ class FingerprintJsServerApiClient {
   /// Constructs a properly encoded request path with optional query parameters.
   String getRequestPath(String basePath, [Map<String, dynamic>? queryParams]) {
     if (basePath.isEmpty) {
-      throw ArgumentError('Base path cannot be empty.');
+      throw SdkError(
+        message: 'Base path cannot be empty.',
+        code: 'EMPTY_BASE_PATH',
+        details: 'Ensure a valid base path is provided.',
+      );
     }
 
     if (queryParams == null || queryParams.isEmpty) {
@@ -95,7 +105,9 @@ class FingerprintJsServerApiClient {
   Future<Map<String, dynamic>> getVisitorData(String visitorId) async {
     return await _sendRequest<Map<String, dynamic>>(
       method: 'GET',
-      endpoint: '/visitor/$visitorId',
+      endpoint: '/visitors/$visitorId',
+      queryParameters: {'api_key': apiKey},
+      include_headers: false,
     );
   }
 
@@ -104,10 +116,13 @@ class FingerprintJsServerApiClient {
     required String method,
     required String endpoint,
     Map<String, dynamic>? body,
+    Map<String, dynamic>? queryParameters,
     T Function(Map<String, dynamic>)? parser,
+    bool include_headers = true,
   }) async {
     final requestPath = getRequestPath(endpoint);
-    final url = Uri.parse('$baseUrl$requestPath');
+    //final url = Uri.parse('$baseUrl$requestPath');
+    final url = Uri.https(baseUrl, requestPath, queryParameters ?? {});
 
     late http.Response response;
 
@@ -120,11 +135,16 @@ class FingerprintJsServerApiClient {
           break;
         case 'GET':
           response = await client
-              .get(url, headers: _getHeaders())
+              .get(url, headers: include_headers ? _getHeaders() : null)
               .timeout(timeout);
           break;
         default:
-          throw ArgumentError('Unsupported HTTP method: $method');
+          throw SdkError(
+            message: 'Unsupported HTTP method: $method',
+            code: 'INVALID_HTTP_METHOD',
+            details:
+                'Please ensure the HTTP method entered is either GET or POST.',
+          );
       }
 
       if (response.statusCode == 429) {
@@ -139,6 +159,15 @@ class FingerprintJsServerApiClient {
             endpoint: endpoint,
             body: body,
             parser: parser,
+          );
+        } else {
+          final errorData = response.body.isNotEmpty
+              ? jsonDecode(response.body)
+              : null;
+          throw TooManyRequestsError(
+            message: 'Too many requests. Please slow down.',
+            statusCode: response.statusCode,
+            errorData: errorData,
           );
         }
       }
@@ -155,7 +184,7 @@ class FingerprintJsServerApiClient {
   /// Returns common headers for API requests.
   Map<String, String> _getHeaders() {
     return {
-      HttpHeaders.authorizationHeader: 'Bearer $apiKey',
+      HttpHeaders.authorizationHeader: '$apiKey',
       HttpHeaders.contentTypeHeader: 'application/json',
     };
   }
@@ -174,9 +203,10 @@ class FingerprintJsServerApiClient {
         );
       }
     } catch (e) {
-      throw RequestError(
-        message: 'Invalid response format',
+      throw UnsealAggregateError(
+        message: 'Failed to unseal response data',
         statusCode: response.statusCode,
+        errorData: e.toString(),
       );
     }
   }

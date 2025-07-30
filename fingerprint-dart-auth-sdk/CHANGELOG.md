@@ -16,7 +16,7 @@
   - Renamed the sample-app README title:  
     `firebase-dart-admin-sample-app` → `firebase-dart-sample-app`  
   - Bumped the Dart SDK constraint in  
-    `example/fingerprint-dart-auth-sdk-flutter-mobile-app/pubspec.yaml` from `^3.7.2` to `^3.8.1`.  
+    `example/fingerprint-dart-auth-sdk-flutter-mobile-app/pubspec.yaml` from `^3.7.2` to `^3.8.2`.  
   - Updated Android config in  
     `example/.../android/app/oldbuild.gradle` and  
     `AndroidManifest.xml` to reflect the new bundle identifiers.  

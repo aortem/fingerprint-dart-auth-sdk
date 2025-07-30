@@ -5,7 +5,7 @@ repository: https://github.com/aortem/fingerprint_dart_auth_sdk
 license: BSD-3
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.8.2
 
 # Add regular dependencies here.
 

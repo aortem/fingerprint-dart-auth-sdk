@@ -46,14 +46,25 @@ class FingerprintJsServerApiClient {
   }
 
   /// Returns the base URL for the given region.
+  // static String _getBaseUrl(Region region) {
+  //   switch (region) {
+  //     case Region.eu:
+  //       return 'https://eu.api.fingerprintjs.com';
+  //     case Region.asia:
+  //       return 'https://ap.api.fingerprintjs.com';
+  //     case Region.us:
+  //       return 'https://api.fingerprintjs.com';
+  //   }
+  // }
+
   static String _getBaseUrl(Region region) {
     switch (region) {
       case Region.eu:
-        return 'https://eu.api.fingerprintjs.com';
+        return 'https://eu.api.fpjs.io';
       case Region.asia:
-        return 'https://ap.api.fingerprintjs.com';
+        return 'https://ap.api.fpjs.io';
       case Region.us:
-        return 'https://api.fingerprintjs.com';
+        return 'https://api.fpjs.io';
     }
   }
 
@@ -107,7 +118,7 @@ class FingerprintJsServerApiClient {
       method: 'GET',
       endpoint: '/visitors/$visitorId',
       queryParameters: {'api_key': apiKey},
-      include_headers: false,
+      includeHeaders: false,
     );
   }
 
@@ -118,11 +129,14 @@ class FingerprintJsServerApiClient {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
     T Function(Map<String, dynamic>)? parser,
-    bool include_headers = true,
+    bool includeHeaders = true,
   }) async {
     final requestPath = getRequestPath(endpoint);
     //final url = Uri.parse('$baseUrl$requestPath');
-    final url = Uri.https(baseUrl, requestPath, queryParameters ?? {});
+    // final url = Uri.https(baseUrl, requestPath, queryParameters ?? {});
+    final url = Uri.parse(
+      '$baseUrl$requestPath',
+    ).replace(queryParameters: queryParameters ?? {});
 
     late http.Response response;
 
@@ -135,7 +149,7 @@ class FingerprintJsServerApiClient {
           break;
         case 'GET':
           response = await client
-              .get(url, headers: include_headers ? _getHeaders() : null)
+              .get(url, headers: includeHeaders ? _getHeaders() : null)
               .timeout(timeout);
           break;
         default:
@@ -182,9 +196,16 @@ class FingerprintJsServerApiClient {
   }
 
   /// Returns common headers for API requests.
+  // Map<String, String> _getHeaders() {
+  //   return {
+  //     HttpHeaders.authorizationHeader: '$apiKey',
+  //     HttpHeaders.contentTypeHeader: 'application/json',
+  //   };
+  // }
+
   Map<String, String> _getHeaders() {
     return {
-      HttpHeaders.authorizationHeader: '$apiKey',
+      HttpHeaders.authorizationHeader: 'Bearer $apiKey',
       HttpHeaders.contentTypeHeader: 'application/json',
     };
   }
@@ -209,5 +230,167 @@ class FingerprintJsServerApiClient {
         errorData: e.toString(),
       );
     }
+  }
+
+  /// Update events using event ID and updates
+  Future<Map<String, dynamic>> updateEvent(EventsUpdateRequest request) async {
+    final url = Uri.parse('$baseUrl/events/${request.eventId}');
+    final response = await http
+        .put(
+          url,
+          headers: {
+            'Authorization': 'Bearer $apiKey',
+            'Content-Type': 'application/json',
+          },
+          body: jsonEncode(request.toJson()),
+        )
+        .timeout(timeout);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      throw Exception('Failed to update event: ${response.body}');
+    }
+  }
+
+  /// Fetch events using query parameters
+  Future<Map<String, dynamic>> getEvents(ExtractQueryParams queryParams) async {
+    final url = Uri.parse('$baseUrl/events?${queryParams.toQueryString()}');
+    final response = await http
+        .get(
+          url,
+          headers: {
+            'Authorization': 'Bearer $apiKey',
+            'Content-Type': 'application/json',
+          },
+        )
+        .timeout(timeout);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      throw Exception('Failed to fetch events: ${response.body}');
+    }
+  }
+
+  /// Fetches related visitors data based on the provided [filter].
+  Future<Map<String, dynamic>> getRelatedVisitors(
+    RelatedVisitorsFilter filter,
+  ) async {
+    final queryParameters = filter.toJson();
+    final queryString = queryParameters.entries
+        .map(
+          (e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}',
+        )
+        .join('&');
+
+    final url = Uri.parse('$baseUrl/related-visitors?$queryString');
+    final response = await http
+        .get(
+          url,
+          headers: {
+            'Authorization': 'Bearer $apiKey',
+            'Content-Type': 'application/json',
+          },
+        )
+        .timeout(timeout);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      throw Exception('Failed to fetch related visitors: ${response.body}');
+    }
+  }
+
+  /// Search events with a [SearchEventsFilter].
+  Future<Map<String, dynamic>> searchEvents(SearchEventsFilter filter) async {
+    final queryString = filter
+        .toJson()
+        .entries
+        .map(
+          (e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}',
+        )
+        .join('&');
+
+    final url = Uri.parse('$baseUrl/events/search?$queryString');
+
+    final response = await http
+        .get(
+          url,
+          headers: {
+            'Authorization': 'Bearer $apiKey',
+            'Content-Type': 'application/json',
+          },
+        )
+        .timeout(timeout);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      throw Exception(
+        'Failed to search events [${response.statusCode}]: ${response.body}',
+      );
+    }
+  }
+
+  /// Fetches visitor history using the provided [VisitorHistoryFilter].
+  Future<Map<String, dynamic>> getVisitorHistory(
+    VisitorHistoryFilter filter,
+  ) async {
+    if (filter.visitorId == null || filter.visitorId!.isEmpty) {
+      throw SdkError(
+        message: 'Visitor ID is required to fetch history',
+        code: 'MISSING_VISITOR_ID',
+        details: 'Pass a valid visitorId in VisitorHistoryFilter.',
+      );
+    }
+
+    final queryParameters = filter.toJson()
+      ..remove('visitorId'); // don't duplicate visitorId in query params
+
+    final queryString = queryParameters.entries
+        .map(
+          (e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}',
+        )
+        .join('&');
+
+    final url = Uri.parse(
+      '$baseUrl/visitors/${filter.visitorId}/history?$queryString',
+    );
+
+    final response = await http
+        .get(
+          url,
+          headers: {
+            'Authorization': 'Bearer $apiKey',
+            'Content-Type': 'application/json',
+          },
+        )
+        .timeout(timeout);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      throw Exception(
+        'Failed to fetch visitor history [${response.statusCode}]: ${response.body}',
+      );
+    }
+  }
+
+  /// Retrieves all visitors (paginated) from the API.
+  Future<VisitorsResponse> getVisitors({int limit = 10, int offset = 0}) async {
+    final response = await _sendRequest<Map<String, dynamic>>(
+      method: 'GET',
+      endpoint: '/visitors',
+      queryParameters: {
+        'limit': limit.toString(),
+        'offset': offset.toString(),
+        'api_key': apiKey,
+      },
+    );
+    return response as VisitorsResponse;
   }
 }

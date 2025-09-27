@@ -24,6 +24,28 @@ class Visitor {
     required this.timestamp,
   });
 
+  /// Factory constructor to create a [Visitor] from JSON.
+  factory Visitor.fromJson(Map<String, dynamic> json) {
+    return Visitor(
+      id: json['id'] as String,
+      fingerprint: json['fingerprint'] as String,
+      ip: json['ip'] as String,
+      userAgent: json['userAgent'] as String,
+      timestamp: json['timestamp'] as String,
+    );
+  }
+
+  /// Converts this [Visitor] instance into JSON.
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'fingerprint': fingerprint,
+      'ip': ip,
+      'userAgent': userAgent,
+      'timestamp': timestamp,
+    };
+  }
+
   @override
   String toString() {
     return 'Visitor(id: $id, fingerprint: $fingerprint, ip: $ip, userAgent: $userAgent, timestamp: $timestamp)';

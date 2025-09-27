@@ -23,10 +23,9 @@ class SearchEventsResponse {
     }
 
     return SearchEventsResponse(
-      events:
-          (json['events'] as List<dynamic>)
-              .map((e) => Event.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      events: (json['events'] as List<dynamic>)
+          .map((e) => Event.fromJson(e as Map<String, dynamic>))
+          .toList(),
       meta: Meta.fromJson(json['meta'] as Map<String, dynamic>),
     );
   }

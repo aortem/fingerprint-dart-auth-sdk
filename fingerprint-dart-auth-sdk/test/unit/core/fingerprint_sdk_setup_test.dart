@@ -6,17 +6,17 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 class MockHttpClient extends Mock implements http.Client {}
 
 void main() {
-  group('AortemFingerprintAuth', () {
+  group('FingerprintAuth', () {
     late MockHttpClient mockHttpClient;
-    late AortemFingerprintAuth auth;
+    late FingerprintAuth auth;
 
     setUp(() {
       mockHttpClient = MockHttpClient();
-      auth = AortemFingerprintAuth(apiKey: 'test_api_key');
+      auth = FingerprintAuth(apiKey: 'test_api_key');
     });
 
     test('should throw ArgumentError if API key is not provided', () {
-      expect(() => AortemFingerprintAuth(apiKey: ''), throwsArgumentError);
+      expect(() => FingerprintAuth(apiKey: ''), throwsArgumentError);
     });
 
     test('should throw Exception on verification failure', () async {

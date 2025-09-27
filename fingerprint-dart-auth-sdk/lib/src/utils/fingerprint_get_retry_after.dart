@@ -6,9 +6,15 @@ import 'dart:io';
 /// - If the header contains a valid date string, the function computes the duration from now to that time.
 /// - If the header is missing or invalid, returns `null`.
 Duration? getRetryAfter(Map<String, String> headers) {
-  final retryAfterValue = headers[HttpHeaders.retryAfterHeader];
+  // final retryAfterValue = headers[HttpHeaders.retryAfterHeader];
+  final retryAfterValue = headers.entries
+      .firstWhere(
+        (e) => e.key.toLowerCase() == HttpHeaders.retryAfterHeader,
+        orElse: () => const MapEntry('', ''),
+      )
+      .value;
 
-  if (retryAfterValue == null) {
+  if (retryAfterValue.isEmpty) {
     return null; // No Retry-After header present
   }
 

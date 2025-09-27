@@ -1,4 +1,4 @@
-import 'aortem_fingerprint_request_error.dart';
+import 'fingerprint_request_error.dart';
 
 /// Represents an error that occurs when unsealing aggregated response data fails.
 class UnsealAggregateError extends RequestError {

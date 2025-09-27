@@ -1,5 +1,5 @@
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:fingerprint_dart_auth_sdk/src/utils/aortem_fingerprint_get_retry_after.dart';
+import 'package:fingerprint_dart_auth_sdk/src/utils/fingerprint_get_retry_after.dart';
 
 import 'dart:io'; // Update path as needed
 

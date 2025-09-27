@@ -1,6 +1,6 @@
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_events_get_response.dart';
-import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_meta.dart';
+import 'package:fingerprint_dart_auth_sdk/src/types/fingerprint_events_get_response.dart';
+import 'package:fingerprint_dart_auth_sdk/src/types/fingerprint_meta.dart';
 // Adjust import based on your file structure
 
 void main() {

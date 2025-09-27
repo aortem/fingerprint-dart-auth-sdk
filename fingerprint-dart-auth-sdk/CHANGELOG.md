@@ -24,7 +24,7 @@
 
 - **Test Suite Polish**  
   - Reformatted several `test/unit/api/…` and `test/unit/types/…` files for consistent trailing commas and single-line constructors.  
-  - Fixed JSON-instantiation in `aortem_fingerprint_events_update_request_test.dart` to throw on missing `eventId`.
+  - Fixed JSON-instantiation in `fingerprint_events_update_request_test.dart` to throw on missing `eventId`.
 
 - **GitHub Issue Templates**  
   - In `.github/ISSUE_TEMPLATE/community-documentation.yml`, removed `ginjardev` from the default assignees.  

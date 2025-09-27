@@ -1,5 +1,5 @@
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:fingerprint_dart_auth_sdk/src/utils/aortem_fingerprint_get_request_path.dart';
+import 'package:fingerprint_dart_auth_sdk/src/utils/fingerprint_get_request_path.dart';
 
 void main() {
   group('getRequestPath tests', () {

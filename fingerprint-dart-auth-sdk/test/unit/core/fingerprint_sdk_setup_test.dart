@@ -1,5 +1,5 @@
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:fingerprint_dart_auth_sdk/src/core/aortem_fingerprint_sdk_setup.dart';
+import 'package:fingerprint_dart_auth_sdk/src/core/fingerprint_sdk_setup.dart';
 
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 

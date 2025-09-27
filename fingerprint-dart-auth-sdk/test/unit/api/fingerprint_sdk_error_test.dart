@@ -1,4 +1,4 @@
-import 'package:fingerprint_dart_auth_sdk/src/api/aortem_fingerprint_sdk_error.dart';
+import 'package:fingerprint_dart_auth_sdk/src/api/fingerprint_sdk_error.dart';
 import 'package:ds_tools_testing/ds_tools_testing.dart';
 
 void main() {

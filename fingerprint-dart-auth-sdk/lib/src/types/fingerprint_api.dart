@@ -1,6 +1,6 @@
-import 'aortem_fingerprint_events_get_response.dart';
-import 'aortem_fingerprint_events_update_request.dart';
-import 'aortem_fingerprint_extract_query_params.dart';
+import 'fingerprint_events_get_response.dart';
+import 'fingerprint_events_update_request.dart';
+import 'fingerprint_extract_query_params.dart';
 
 /// Represents a request for fingerprint verification.
 class VerificationRequest {

@@ -1,5 +1,5 @@
-import 'aortem_fingerprint_meta.dart';
-import 'aortem_fingerprint_releated_visitor.dart';
+import 'fingerprint_meta.dart';
+import 'fingerprint_releated_visitor.dart';
 
 /// Represents the response from the FingerprintJS Pro API when querying for related visitors.
 class RelatedVisitorsResponse {

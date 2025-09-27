@@ -1,4 +1,4 @@
-import 'aortem_fingerprint_request_error.dart';
+import 'fingerprint_request_error.dart';
 
 /// A custom exception for errors occurring during the unsealing of a single sealed data element.
 class UnsealError implements RequestError {

@@ -1,6 +1,6 @@
-import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_events_get_response.dart';
+import 'package:fingerprint_dart_auth_sdk/src/types/fingerprint_events_get_response.dart';
 
-import 'aortem_fingerprint_meta.dart';
+import 'fingerprint_meta.dart';
 
 /// Represents the response from the FingerprintJS Pro API when searching for events.
 class SearchEventsResponse {

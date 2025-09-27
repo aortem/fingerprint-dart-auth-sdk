@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ds_standard_features/ds_standard_features.dart';
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:fingerprint_dart_auth_sdk/src/utils/aortem_fingerprint_is_valid_webhook_signature.dart';
+import 'package:fingerprint_dart_auth_sdk/src/utils/fingerprint_is_valid_webhook_signature.dart';
 // Update with the correct import path
 
 void main() {

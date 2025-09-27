@@ -1,5 +1,5 @@
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:fingerprint_dart_auth_sdk/src/core/aortem_fingerprint_authentication_mode.dart';
+import 'package:fingerprint_dart_auth_sdk/src/core/fingerprint_authentication_mode.dart';
 
 void main() {
   group('AuthenticationMode', () {

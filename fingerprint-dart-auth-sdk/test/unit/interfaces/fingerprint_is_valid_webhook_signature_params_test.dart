@@ -1,5 +1,5 @@
 import 'package:ds_tools_testing/ds_tools_testing.dart';
-import 'package:fingerprint_dart_auth_sdk/src/interfaces/aortem_fingerprint_is_valid_webhook_signature_params.dart';
+import 'package:fingerprint_dart_auth_sdk/src/interfaces/fingerprint_is_valid_webhook_signature_params.dart';
 
 void main() {
   group('DefaultWebhookSignatureParams', () {

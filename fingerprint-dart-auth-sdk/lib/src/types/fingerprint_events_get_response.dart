@@ -1,4 +1,4 @@
-import 'aortem_fingerprint_meta.dart';
+import 'fingerprint_meta.dart';
 
 /// Represents an individual event returned by the FingerprintJS Pro API.
 class Event {

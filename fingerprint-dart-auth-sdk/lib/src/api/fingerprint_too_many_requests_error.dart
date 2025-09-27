@@ -1,4 +1,4 @@
-import 'aortem_fingerprint_request_error.dart';
+import 'fingerprint_request_error.dart';
 
 /// A custom exception for handling HTTP 429 Too Many Requests errors.
 class TooManyRequestsError implements RequestError {

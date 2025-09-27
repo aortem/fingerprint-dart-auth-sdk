@@ -1,4 +1,4 @@
-import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_search_events_filter.dart';
+import 'package:fingerprint_dart_auth_sdk/src/types/fingerprint_search_events_filter.dart';
 import 'package:ds_tools_testing/ds_tools_testing.dart';
 
 void main() {

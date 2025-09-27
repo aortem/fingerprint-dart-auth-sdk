@@ -1,5 +1,5 @@
-import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_meta.dart';
-import 'package:fingerprint_dart_auth_sdk/src/types/aortem_fingerprint_visitor.dart';
+import 'package:fingerprint_dart_auth_sdk/src/types/fingerprint_meta.dart';
+import 'package:fingerprint_dart_auth_sdk/src/types/fingerprint_visitor.dart';
 
 /// Represents the response from the FingerprintJS Pro API when fetching visitors data.
 class VisitorsResponse {

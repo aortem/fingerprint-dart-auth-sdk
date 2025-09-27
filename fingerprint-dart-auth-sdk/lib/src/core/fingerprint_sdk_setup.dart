@@ -1,9 +1,10 @@
-import 'dart:io';
+// import 'dart:io';
+import 'dart:convert';
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
-/// AortemFingerprintAuth handles fingerprint authentication using the FingerprintJS API.
+/// FingerprintAuth handles fingerprint authentication using the FingerprintJS API.
 /// It allows verifying fingerprint payloads by making HTTP requests to the API.
-class AortemFingerprintAuth {
+class FingerprintAuth {
   /// API key used for authentication with FingerprintJS.
   late final String apiKey;
 
@@ -14,14 +15,14 @@ class AortemFingerprintAuth {
   ///
   /// The API key can be provided directly, via an environment variable,
   /// or by setting the `FINGERPRINTJS_API_KEY` in the system environment.
-  AortemFingerprintAuth({
+  FingerprintAuth({
     String? apiKey,
     String? envVar,
     this.baseUrl = 'https://api.fingerprintjs.com',
   }) : apiKey =
            apiKey ??
            envVar ??
-           Platform.environment['FINGERPRINTJS_API_KEY'] ??
+           //  Platform.environment['FINGERPRINTJS_API_KEY'] ??
            '' {
     if (this.apiKey.isEmpty) {
       throw ArgumentError(
@@ -47,7 +48,7 @@ class AortemFingerprintAuth {
 
     if (response.statusCode == 200) {
       return response.body.isNotEmpty
-          ? response.body as Map<String, dynamic>
+          ? jsonDecode(response.body) as Map<String, dynamic>
           : {};
     } else {
       throw Exception('Verification failed: ${response.body}');

@@ -14,7 +14,7 @@ Duration? getRetryAfter(Map<String, String> headers) {
       )
       .value;
 
-  if (retryAfterValue == null) {
+  if (retryAfterValue.isEmpty) {
     return null; // No Retry-After header present
   }
 

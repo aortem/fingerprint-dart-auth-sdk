@@ -118,7 +118,7 @@ class FingerprintJsServerApiClient {
       method: 'GET',
       endpoint: '/visitors/$visitorId',
       queryParameters: {'api_key': apiKey},
-      include_headers: false,
+      includeHeaders: false,
     );
   }
 
@@ -129,7 +129,7 @@ class FingerprintJsServerApiClient {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
     T Function(Map<String, dynamic>)? parser,
-    bool include_headers = true,
+    bool includeHeaders = true,
   }) async {
     final requestPath = getRequestPath(endpoint);
     //final url = Uri.parse('$baseUrl$requestPath');
@@ -149,7 +149,7 @@ class FingerprintJsServerApiClient {
           break;
         case 'GET':
           response = await client
-              .get(url, headers: include_headers ? _getHeaders() : null)
+              .get(url, headers: includeHeaders ? _getHeaders() : null)
               .timeout(timeout);
           break;
         default:

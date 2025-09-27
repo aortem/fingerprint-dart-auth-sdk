@@ -14,6 +14,24 @@ class VisitorsResponse {
   /// Requires a list of [visitors] and metadata [meta].
   VisitorsResponse({required this.visitors, required this.meta});
 
+  /// Creates a VisitorsResponse instance from a JSON map.
+  factory VisitorsResponse.fromJson(Map<String, dynamic> json) {
+    return VisitorsResponse(
+      visitors: (json['visitors'] as List<dynamic>)
+          .map((v) => Visitor.fromJson(v as Map<String, dynamic>))
+          .toList(),
+      meta: Meta.fromJson(json['meta'] as Map<String, dynamic>),
+    );
+  }
+
+  /// Converts the VisitorsResponse instance to a JSON-compatible map.
+  Map<String, dynamic> toJson() {
+    return {
+      'visitors': visitors.map((v) => v.toJson()).toList(),
+      'meta': meta.toJson(),
+    };
+  }
+
   @override
   String toString() {
     return 'VisitorsResponse(visitors: $visitors, meta: $meta)';

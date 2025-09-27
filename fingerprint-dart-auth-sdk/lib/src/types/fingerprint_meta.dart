@@ -25,18 +25,15 @@ class Meta {
     }
 
     return Meta(
-      count:
-          json['count'] is int
-              ? json['count'] as int
-              : int.tryParse(json['count'].toString()) ?? 0,
-      page:
-          json['page'] is int
-              ? json['page'] as int
-              : int.tryParse(json['page'].toString()) ?? 0,
-      limit:
-          json['limit'] is int
-              ? json['limit'] as int
-              : int.tryParse(json['limit'].toString()) ?? 0,
+      count: json['count'] is int
+          ? json['count'] as int
+          : int.tryParse(json['count'].toString()) ?? 0,
+      page: json['page'] is int
+          ? json['page'] as int
+          : int.tryParse(json['page'].toString()) ?? 0,
+      limit: json['limit'] is int
+          ? json['limit'] as int
+          : int.tryParse(json['limit'].toString()) ?? 0,
     );
   }
 

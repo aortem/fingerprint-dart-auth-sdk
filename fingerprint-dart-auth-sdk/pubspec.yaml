@@ -5,7 +5,7 @@ repository: https://github.com/aortem/fingerprint_dart_auth_sdk
 license: BSD-3
 
 environment:
-  sdk: ^3.8.2
+  sdk: ^3.9.3
 
 # Add regular dependencies here.
 
@@ -13,15 +13,15 @@ dependencies:
 #------------------ STANDARD FEATURES----------------------dart-----------
 ## There are three standard libraries.  Each one can be used with a different xxx 
 
-  ds_standard_features: ^0.0.4 #Standard Dart Team Utilities For HTTP //Default
-  build_web_compilers: ^4.0.11
-  jwt_generator: ^0.0.3
+  ds_standard_features: ^0.1.2
+  build_web_compilers: ^4.2.4
+  jwt_generator: ^0.0.6
 
 
 #------------------ TESTING FEATURES---------------------------------
 
 dev_dependencies:
-  ds_tools_testing: ^0.0.4 #Standard Dart Team Testing Tools
+  ds_tools_testing: ^0.1.1
   git_hooks: any
   lints: any
 

@@ -1,3 +1,46 @@
+# 0.0.2
+
+### Added
+
+* Documentation improvements for `README.md` and `example/` test setup to guide consumers on integrating the testing helpers.
+* Added `license:` field explicitly to **pubspec.yaml** for pub.dev compliance.
+* Introduced structured dependency organization (core vs. dev tooling separation).
+
+### Changed
+
+* Refactored **pubspec.yaml** to correctly categorize dependencies:
+
+  * Moved `build_runner` out of dependencies (no longer required or exported).
+  * Retained `build_test`, `mockito`, `coverage`, `http`, and `test` as core runtime dependencies so they’re available transitively to consumers.
+* Cleaned up **lib/ds_tools_testing.dart** by removing invalid `build_runner` export.
+* Normalized export order for clarity and lint compliance.
+* Updated repository and metadata fields to match current `dartstream` namespace.
+
+### Fixed
+
+* Analyzer error: *Target of URI doesn't exist: 'package:build_runner/build_runner.dart'* by removing invalid import.
+* Minor typo and spacing corrections in `pubspec.yaml` and top-level documentation.
+* Ensured all exported libraries exist and resolve correctly in analyzer and consumer packages.
+
+### Removed
+
+* Invalid export of `build_runner` (no longer included in library or dependency list).
+* Deprecated internal mocks and redundant test references.
+
+### Notes
+
+* **No breaking API changes** for consumers.
+* Consumers can continue using:
+
+  ```dart
+  import 'package:ds_tools_testing/ds_tools_testing.dart';
+  ```
+
+  without modification.
+* Package now conforms to **pub.dev scoring guidelines** (metadata, license, example, and docs).
+* Next step: prepare minor bump `0.2.0` for adding optional `browser_test` exports once reviewed.
+
+
 ## 0.0.1
 
 ### Added

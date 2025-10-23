@@ -5,9 +5,9 @@ import 'package:ds_standard_features/ds_standard_features.dart' as http;
 import 'package:fingerprint_dart_auth_sdk/fingerprint_dart_auth_sdk.dart';
 
 import '../core/fingerprint_region.dart';
-import '../utils/fingerprint_get_integration_info.dart';
-import '../utils/fingerprint_get_retry_after.dart';
-import 'fingerprint_request_error.dart';
+//import '../utils/fingerprint_get_integration_info.dart';
+//import '../utils/fingerprint_get_retry_after.dart';
+//import 'fingerprint_request_error.dart';
 
 /// A client for interacting with the FingerprintJS Pro Server API.
 class FingerprintJsServerApiClient {

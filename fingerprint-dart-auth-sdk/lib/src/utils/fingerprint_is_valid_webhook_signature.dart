@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:ds_standard_features/ds_standard_features.dart' as crypto;
+//import 'package:ds_standard_features/ds_standard_features.dart' as crypto;
+import 'package:crypto/crypto.dart';
 
 /// Verifies the authenticity of an incoming webhook request.
 ///
@@ -26,9 +27,9 @@ bool isValidWebhookSignature({
   }
 
   // Compute HMAC SHA256 hash
-  final hmac = crypto.Hmac(crypto.sha256, utf8.encode(secret));
+  // Corrected line (since Hmac and sha256 are now directly imported):
+  final hmac = Hmac(sha256, utf8.encode(secret));
   final digest = hmac.convert(utf8.encode(payload));
-
   // Convert computed digest to hex string
   final computedSignature = digest.toString();
 

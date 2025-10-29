@@ -16,7 +16,7 @@ dependencies:
   ds_standard_features: ^0.1.3
   build_web_compilers: ^4.3.0
   jwt_generator: ^0.0.8
-  crypto: ^3.0.0
+  
 
 
 #------------------ TESTING FEATURES---------------------------------

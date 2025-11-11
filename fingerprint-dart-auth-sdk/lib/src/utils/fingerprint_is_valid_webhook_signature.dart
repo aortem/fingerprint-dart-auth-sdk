@@ -1,15 +1,12 @@
 import 'dart:convert';
-import 'package:ds_standard_features/ds_standard_features.dart' as crypto;
+import 'package:jwt_generator/jwt_generator.dart';
 
-/// Verifies the authenticity of an incoming webhook request.
+/// Verifies the authenticity of an incoming webhook request using
+/// HMAC-SHA256 via the `jwt_generator` package.
 ///
-/// - [payload]: The raw body of the webhook request.
-/// - [signature]: The signature provided in the webhook request headers.
-/// - [secret]: The secret key used for HMAC hashing.
-///
-/// Returns `true` if the computed signature matches the provided signature, otherwise `false`.
-///
-/// Throws [ArgumentError] if any parameter is missing or invalid.
+/// - [payload]: Raw webhook body (String)
+/// - [signature]: Base64-encoded signature from the request
+/// - [secret]: Secret key shared between client and server
 bool isValidWebhookSignature({
   required String payload,
   required String signature,
@@ -25,24 +22,22 @@ bool isValidWebhookSignature({
     throw ArgumentError('Secret key cannot be empty.');
   }
 
-  // Compute HMAC SHA256 hash
-  final hmac = crypto.Hmac(crypto.sha256, utf8.encode(secret));
-  final digest = hmac.convert(utf8.encode(payload));
+  // 1. Convert secret to bytes (expected by constructor)
+  final secretBytes = utf8.encode(secret);
+  final verifier = HmacSignatureVerifier(secret: secretBytes);
 
-  // Convert computed digest to hex string
-  final computedSignature = digest.toString();
-
-  // Use constant-time comparison to prevent timing attacks
-  return _secureCompare(computedSignature, signature);
-}
-
-/// Performs a constant-time string comparison to prevent timing attacks.
-bool _secureCompare(String a, String b) {
-  if (a.length != b.length) return false;
-
-  int result = 0;
-  for (int i = 0; i < a.length; i++) {
-    result |= a.codeUnitAt(i) ^ b.codeUnitAt(i);
+  // 2. Pass payload as String and signature as String to verify()
+  String normalizedSignature;
+  try {
+    // Ensure signature is valid Base64
+    base64Decode(signature);
+    normalizedSignature = signature;
+  } catch (_) {
+    throw ArgumentError('Signature must be valid Base64.');
   }
-  return result == 0;
+
+  // 3. Perform verification
+  final isValid = verifier.verify(payload, normalizedSignature);
+
+  return isValid;
 }

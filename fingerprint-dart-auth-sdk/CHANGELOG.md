@@ -1,3 +1,9 @@
+# 0.0.3
+
+### Updated
+
+* Bump SDK version to 3.10.3
+
 # 0.0.2
 
 ### Added

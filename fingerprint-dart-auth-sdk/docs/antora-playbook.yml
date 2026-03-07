@@ -1,0 +1,15 @@
+site:
+  title: Fingerprint Dart Auth SDK Docs
+  start_page: fingerprint-dart-auth-sdk::index.adoc
+  url: https://fingerprint-dart-auth-sdk-docs.web.app/
+
+content:
+  sources:
+    - url: ..
+      branches: HEAD
+      start_path: fingerprint-dart-auth-sdk/docs/components/fingerprint-dart-auth-sdk
+
+ui:
+  bundle:
+    url: ./ui/antora-ui-custom/ui-bundle
+    snapshot: true

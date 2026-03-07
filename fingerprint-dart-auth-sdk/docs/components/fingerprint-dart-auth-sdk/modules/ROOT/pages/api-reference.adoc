@@ -1,0 +1,22 @@
+﻿= API Reference
+:page-layout: default
+
+This page maps the public package entrypoint to the current source tree.
+
+== Package API
+
+* Package: fingerprint_dart_auth_sdk
+* Version: v0.0.3
+* Package root: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk
+* Import path: package:fingerprint_dart_auth_sdk/fingerprint_dart_auth_sdk.dart
+* Entrypoint file: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/lib/fingerprint_dart_auth_sdk.dart
+
+== Source Areas
+
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/lib/src
+
+== Supporting Sources
+
+* Tests: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/test
+* README: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/README.md
+* Changelog: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/CHANGELOG.md

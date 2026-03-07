@@ -1,0 +1,21 @@
+﻿= Releases
+:navtitle: Releases
+:description: Release tracking for Fingerprint Dart Auth SDK.
+:sectnums:
+
+This page tracks the current public package version documented for Fingerprint Dart Auth SDK.
+'''
+
+== v0.0.3
+
+=== Overview
+The current public package version for fingerprint_dart_auth_sdk is v0.0.3.
+
+=== Release Sources
+
+* Pubspec: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/pubspec.yaml
+* Changelog: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/CHANGELOG.md
+
+=== Notes
+* Keep this page aligned with the version declared in pubspec.yaml.
+* Detailed release history and change notes remain in CHANGELOG.md until fuller curated release notes are added here.

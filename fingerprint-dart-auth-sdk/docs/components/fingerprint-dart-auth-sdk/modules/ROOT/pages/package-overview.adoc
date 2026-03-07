@@ -1,0 +1,25 @@
+﻿= Package Overview
+:page-layout: default
+
+Fingerprint Dart Auth SDK is published as fingerprint_dart_auth_sdk at version v0.0.3.
+
+== Source of Truth
+
+* Pubspec: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/pubspec.yaml
+* README: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/README.md
+* Changelog: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/CHANGELOG.md
+
+== Directory Layout
+
+* Repository root: apps/sdks/fingerprint-dart-auth-sdk
+* Package root: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk
+* Documentation: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/docs
+* Library sources: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/lib
+* Examples: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example
+* Tests: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/test
+* Local dev tools: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/local_dev_tools
+
+== Primary Source Areas
+
+* Public entrypoint: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/lib/fingerprint_dart_auth_sdk.dart
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/lib/src

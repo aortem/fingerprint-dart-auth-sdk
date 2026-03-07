@@ -57,6 +57,17 @@ validation_trigger:
     # Fallback: Skip if no condition matches
     - when: never
 
+# Validation Conditional Triggers for Docs
+validation_trigger_docs:
+  stage: validation
+  trigger:
+    include: tools/pipelines/firebase-hosting/child-ci-production-docs.yml
+  rules:
+    - changes:
+        - docs/**/*
+      when: always
+    - when: never
+
 # # Unit Test Conditional Triggers
 # unit_test_trigger:
 #   stage: unit_testing

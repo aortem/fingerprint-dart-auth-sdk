@@ -1,0 +1,25 @@
+﻿= Examples
+:page-layout: default
+
+Examples and sample apps for Fingerprint Dart Auth SDK live under:
+
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/README.md
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/README.md
+
+== Current Example Directories
+
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-compose-app
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-dart-web-app
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-flutter-desktop-app
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-flutter-games-app
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-flutter-mobile-app
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-flutter-web-app
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-react-app
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-svelte-app
+* apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/example/fingerprint-dart-auth-sdk-vue-app
+
+== Notes
+
+* Use the current example directory names as the source of truth for available sample apps.
+* Expand this page with narrative walkthroughs as examples are finalized.

@@ -117,4 +117,8 @@ firebase:deploy_docs:
   rules:
     # Condition 1: Branch is not main, qa, or development
     - if: '$CI_COMMIT_BRANCH == "main"'
+<<<<<<< HEAD
       when: always
+=======
+      when: always
+>>>>>>> development

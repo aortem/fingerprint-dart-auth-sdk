@@ -64,7 +64,7 @@ validation_trigger_docs:
     include: tools/pipelines/firebase-hosting/child-ci-production-docs.yml
   rules:
     - changes:
-        - docs/**/*
+        - fingerprint-dart-auth-sdk/docs/**/*
       when: always
     - when: never
 

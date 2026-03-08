@@ -5,7 +5,7 @@ site:
 
 content:
   sources:
-    - url: ..
+    - url: ../..
       branches: HEAD
       start_path: fingerprint-dart-auth-sdk/docs/components/fingerprint-dart-auth-sdk
 

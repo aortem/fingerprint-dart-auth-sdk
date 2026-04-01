@@ -1,11 +1,11 @@
-# 0.0.3
+# Changelog
 
+## [0.0.3]
 ### Updated
 
 * Bump SDK version to 3.10.3
 
-# 0.0.2
-
+## [0.0.2]
 ### Added
 
 * Documentation improvements for `README.md` and `example/` test setup to guide consumers on integrating the testing helpers.
@@ -47,8 +47,7 @@
 * Next step: prepare minor bump `0.2.0` for adding optional `browser_test` exports once reviewed.
 
 
-## 0.0.1
-
+## [0.0.1]
 ### Added
 - **Global .gitignore**  
   Added a `.gitignore` at the root of `fingerprint-dart-auth-sdk/` to ignore Flutter/Dart build artifacts (`build/`, `.dart_tool/`, `.flutter-plugins*`) and IDE folders (`.idea/`, `.vscode/`).
@@ -86,16 +85,14 @@
 
 
 
-## 0.0.1-pre+2
-
+## [0.0.1-pre+2]
 - Add All Methods
 - Cleanup Repo
 
-## 0.0.1-pre+1
-
+## [0.0.1-pre+1]
 - Add All Methods
 - Cleanup Repo
 
-## 0.0.1-pre
-
+## [0.0.1-pre]
 - Initial pre-release version of the fingerprint Dart Auth SDK.
+

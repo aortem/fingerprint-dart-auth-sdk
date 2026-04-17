@@ -1,5 +1,5 @@
-// import 'dart:io';
 import 'dart:convert';
+
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
 /// FingerprintAuth handles fingerprint authentication using the FingerprintJS API.
@@ -11,19 +11,19 @@ class FingerprintAuth {
   /// Base URL for the FingerprintJS API.
   final String baseUrl;
 
-  /// Constructor to initialize API key and base URL.
+  /// HTTP client used for verification requests.
+  final http.Client client;
+
+  /// Constructor to initialize API key, base URL, and optional client.
   ///
-  /// The API key can be provided directly, via an environment variable,
-  /// or by setting the `FINGERPRINTJS_API_KEY` in the system environment.
+  /// The API key can be provided directly or via an environment variable.
   FingerprintAuth({
     String? apiKey,
     String? envVar,
     this.baseUrl = 'https://api.fingerprintjs.com',
-  }) : apiKey =
-           apiKey ??
-           envVar ??
-           //  Platform.environment['FINGERPRINTJS_API_KEY'] ??
-           '' {
+    http.Client? client,
+  }) : apiKey = apiKey ?? envVar ?? '',
+       client = client ?? http.Client() {
     if (this.apiKey.isEmpty) {
       throw ArgumentError(
         'API key must be provided either directly or via environment variables.',
@@ -37,10 +37,10 @@ class FingerprintAuth {
   /// Throws an exception if the verification request fails.
   Future<Map<String, dynamic>> verify(String payload) async {
     final url = Uri.parse('$baseUrl/verify');
-    final response = await http.post(
+    final response = await client.post(
       url,
       headers: {
-        'Authorization': 'Bearer $apiKey', // ✅ Fixed string interpolation
+        'Authorization': 'Bearer $apiKey',
         'Content-Type': 'application/json',
       },
       body: payload,
@@ -50,8 +50,8 @@ class FingerprintAuth {
       return response.body.isNotEmpty
           ? jsonDecode(response.body) as Map<String, dynamic>
           : {};
-    } else {
-      throw Exception('Verification failed: ${response.body}');
     }
+
+    throw Exception('Verification failed: ${response.body}');
   }
 }

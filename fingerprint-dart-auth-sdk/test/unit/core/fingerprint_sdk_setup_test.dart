@@ -1,39 +1,37 @@
+import 'package:ds_standard_features/ds_standard_features.dart' as http;
 import 'package:ds_tools_testing/ds_tools_testing.dart';
 import 'package:fingerprint_dart_auth_sdk/src/core/fingerprint_sdk_setup.dart';
-
-import 'package:ds_standard_features/ds_standard_features.dart' as http;
-
-class MockHttpClient extends Mock implements http.Client {}
+import '../../support/fake_http_client.dart';
 
 void main() {
   group('FingerprintAuth', () {
-    late MockHttpClient mockHttpClient;
-    late FingerprintAuth auth;
-
-    setUp(() {
-      mockHttpClient = MockHttpClient();
-      auth = FingerprintAuth(apiKey: 'test_api_key');
-    });
-
-    test('should throw ArgumentError if API key is not provided', () {
+    test('throws ArgumentError if API key is not provided', () {
       expect(() => FingerprintAuth(apiKey: ''), throwsArgumentError);
     });
 
-    test('should throw Exception on verification failure', () async {
-      final url = Uri.parse('${auth.baseUrl}/verify');
-
-      when(
-        () => mockHttpClient.post(
-          url,
-          headers: any(named: 'headers'),
-          body: any(named: 'body'),
-        ),
-      ).thenAnswer((_) async => http.Response('Error', 400));
+    test('throws Exception on verification failure', () async {
+      final auth = FingerprintAuth(
+        apiKey: 'test_api_key',
+        client: FakeHttpClient((_) async => http.Response('Error', 400)),
+      );
 
       expect(
         () => auth.verify('{"fingerprint": "test_data"}'),
         throwsA(isA<Exception>()),
       );
+    });
+
+    test('returns decoded payload on successful verification', () async {
+      final auth = FingerprintAuth(
+        apiKey: 'test_api_key',
+        client: FakeHttpClient(
+          (_) async => http.Response('{"verified":true}', 200),
+        ),
+      );
+
+      final result = await auth.verify('{"fingerprint":"test_data"}');
+
+      expect(result['verified'], true);
     });
   });
 }

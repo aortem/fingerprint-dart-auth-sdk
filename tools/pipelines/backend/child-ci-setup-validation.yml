@@ -1,4 +1,4 @@
-﻿stages:
+stages:
   - validate
   - analyze
 
@@ -24,13 +24,13 @@ validate_branch_name:
       echo "Branch name: $BRANCH_NAME"
 
       if echo "$BRANCH_NAME" | grep -Eq "^(development|qa|beta|main)$"; then
-        echo "âœ… Valid branch name for protected branches: $BRANCH_NAME."
+        echo "✅ Valid branch name for protected branches: $BRANCH_NAME."
       elif echo "$BRANCH_NAME" | grep -Eq "^(feat|fix|hotfix|chore|test|refactor|release|docs)/[a-z0-9_-]+$"; then
-        echo "âœ… Branch name follows naming convention: $BRANCH_NAME."
+        echo "✅ Branch name follows naming convention: $BRANCH_NAME."
       elif echo "$BRANCH_NAME" | grep -Eq "^[0-9]+\.[0-9]+\.[0-9]+(-[a-z0-9_-]+)?(\+[0-9]+)?$"; then
-        echo "âœ… Valid release branch name: $BRANCH_NAME."  
+        echo "✅ Valid release branch name: $BRANCH_NAME."  
       else
-        echo "âŒ Invalid branch name: $BRANCH_NAME."
+        echo "❌ Invalid branch name: $BRANCH_NAME."
         echo "Expected format: <type>/<branch-name>. Valid types: feat, fix, hotfix, chore, test, refactor, release, docs, development, qa, beta, main."
         exit 1
       fi
@@ -63,7 +63,7 @@ validate_commit_messages:
       INVALID_COMMITS=$(git log -1 --format=%s | grep -vE "$COMBINED_REGEX" || true)
 
       if [ -n "$INVALID_COMMITS" ]; then
-        echo "âŒ Commit message does not follow convention:"
+        echo "❌ Commit message does not follow convention:"
         echo "$INVALID_COMMITS"
         echo "Expected formats:"
         echo "  Merge branch 'source-branch' into 'target-branch' (for merge requests)"
@@ -73,7 +73,7 @@ validate_commit_messages:
         echo "  fix(payment): resolve rounding error in total calculation"
         exit 1
       else
-        echo "âœ… Commit message follows the convention."
+        echo "✅ Commit message follows the convention."
       fi
   rules:
     - when: always
@@ -94,7 +94,7 @@ validate_dart_sdk_version:
     - echo "$PUBSPEC_FILES"
 
     # Define the minimum required Dart SDK version
-    - MINIMUM_VERSION="3.10.7"
+    - MINIMUM_VERSION="3.11.4"
     - ALL_VALID="true"
 
     # Iterate over each pubspec.yaml file
@@ -112,27 +112,27 @@ validate_dart_sdk_version:
 
         # Validate the extracted version
         if [ "$SDK_VERSION" = "not_found" ]; then
-          echo "âŒ Failed to extract Dart SDK version from $PUBSPEC. Ensure the file contains a valid 'sdk' entry."
+          echo "❌ Failed to extract Dart SDK version from $PUBSPEC. Ensure the file contains a valid 'sdk' entry."
           ALL_VALID="false"
           continue
         fi
 
         # Compare the version
         if [[ $(echo -e "${SDK_VERSION}\n${MINIMUM_VERSION}" | sort -V | head -n1) != "$MINIMUM_VERSION" ]]; then
-          echo "âŒ Dart SDK version in $PUBSPEC must be at least $MINIMUM_VERSION, found $SDK_VERSION"
+          echo "❌ Dart SDK version in $PUBSPEC must be at least $MINIMUM_VERSION, found $SDK_VERSION"
           ALL_VALID="false"
         else
-          echo "âœ… Dart SDK version in $PUBSPEC is satisfactory: $SDK_VERSION"
+          echo "✅ Dart SDK version in $PUBSPEC is satisfactory: $SDK_VERSION"
         fi
       done
 
     # Exit with failure if any pubspec.yaml file has an invalid version
     - |
       if [ "$ALL_VALID" != "true" ]; then
-        echo "âŒ One or more pubspec.yaml files have an invalid Dart SDK version."
+        echo "❌ One or more pubspec.yaml files have an invalid Dart SDK version."
         exit 1
       else
-        echo "âœ… All pubspec.yaml files have a valid Dart SDK version."
+        echo "✅ All pubspec.yaml files have a valid Dart SDK version."
       fi
   rules:
     - when: always
@@ -141,30 +141,30 @@ validate_format:
   stage: validate
   image: dart:stable
   script:
-    - echo "ðŸ” Fetching Dart depsâ€¦"
+    - echo "🔍 Fetching Dart deps…"
     - cd fingerprint-dart-auth-sdk
     - dart pub get
 
     # # if you have a Flutter example, fetch its deps too:
     # - |
     #   if [ -d example/fingerprint-dart-auth-sdk-flutter-mobile-app ]; then
-    #     echo "ðŸ” Fetching Flutter example depsâ€¦"
+    #     echo "🔍 Fetching Flutter example deps…"
     #     cd example/fingerprint-dart-auth-sdk-flutter-mobile-app
     #     flutter pub get
     #     cd - >/dev/null
     #   fi
 
-    - echo "ðŸ”§ Running pub.dev/Panaâ€“style format checkâ€¦"
+    - echo "🔧 Running pub.dev/Pana–style format check…"
     # silent check, exit code tells us pass/fail
     - dart format --output=none --set-exit-if-changed .
     - |
       if [ $? -ne 0 ]; then
-        echo "âŒ Formatting issues detected! Listing files that need formatting:"
+        echo "❌ Formatting issues detected! Listing files that need formatting:"
         # now show exactly which files are out of line
         dart format --dry-run .
         exit 1
       else
-        echo "âœ… All Dart files are properly formatted."
+        echo "✅ All Dart files are properly formatted."
       fi
   rules:
     - when: always

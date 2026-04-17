@@ -1,21 +1,90 @@
-﻿= Releases
+= Releases
 :navtitle: Releases
-:description: Release tracking for Fingerprint Dart Auth SDK.
+:description: Release highlights and package history for Fingerprint Dart Auth SDK.
 :sectnums:
 
-This page tracks the current public package version documented for Fingerprint Dart Auth SDK.
+This page summarizes the stable package release history for Fingerprint Dart Auth SDK and keeps the public docs aligned with the published SDK versions.
 '''
 
-== v0.0.3
-
-=== Overview
-The current public package version for fingerprint_dart_auth_sdk is v0.0.3.
-
-=== Release Sources
+== Release Sources
 
 * Pubspec: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/pubspec.yaml
 * Changelog: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/CHANGELOG.md
 
+== v0.0.4
+
+=== Overview
+This release finalizes the Dart 3.11.4 baseline, restores test coverage, and aligns webhook-signature verification with the shipped examples.
+
+=== Highlights
+* Dart SDK baseline aligned to `^3.11.4`
+* Webhook-signature verification hardened with HMAC-SHA256
+* Validation and release-pipeline fixes
+
+=== Improvements
+* Upgraded direct package dependencies to current compatible releases.
+* Added injectable HTTP client support to `FingerprintAuth` for reliable testing.
+* Removed the stray docs artifact from the publishable package.
+
+== v0.0.3
+
+=== Overview
+This release aligns the package with a newer Dart SDK baseline.
+
+=== Highlights
+* Dart SDK bumped to `3.10.3`
+
+=== Improvements
+* Updated the package to the newer Dart SDK baseline.
+
+== v0.0.2
+
+=== Overview
+This release focuses on packaging, documentation, and dependency hygiene to make the SDK easier to consume and publish cleanly.
+
+=== Highlights
+* Better README and example documentation
+* Cleaner dependency organization
+* Improved pub.dev compliance and analyzer behavior
+
+=== Improvements
+* Added clearer documentation for `README.md` and example test setup.
+* Added the `license:` field for pub.dev compliance.
+* Reorganized dependencies to separate core and development concerns.
+* Normalized exports and repository metadata.
+
+=== Fixes
+* Removed the invalid `build_runner` export and related analyzer issues.
+* Corrected exported-library resolution issues and minor documentation typos.
+
+== v0.0.1
+
+=== Overview
+This release establishes the first stable package version and introduces the initial release automation and example-app cleanup.
+
+=== Highlights
+* First stable package release
+* Automated release workflow support
+* Example app and test suite cleanup
+
+=== Improvements
+* Added release automation scripts and CI hooks for tagging, release-note extraction, and GitLab release publishing.
+* Updated example app naming, Android and Linux config, and SDK constraints.
+* Cleaned up issue templates and test formatting for consistency.
+
+=== Removed
+* Removed obsolete CI artifacts, deprecated jobs, and older pipeline references.
+
+== Pre-release History
+
+=== Overview
+Earlier pre-stable package builds are part of the SDK history and remain documented in the changelog.
+
+=== Included Pre-release Tags
+* `0.0.1-pre+2`
+* `0.0.1-pre+1`
+* `0.0.1-pre`
+
 === Notes
-* Keep this page aligned with the version declared in pubspec.yaml.
-* Detailed release history and change notes remain in CHANGELOG.md until fuller curated release notes are added here.
+* Keep this page aligned with the version declared in `pubspec.yaml`.
+* Use `CHANGELOG.md` as the source of truth for exhaustive historical change notes.

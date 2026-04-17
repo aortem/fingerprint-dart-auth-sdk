@@ -1,11 +1,28 @@
-# 0.0.3
+# Changelog
 
+## [0.0.4]
+### Updated
+
+* Raised the package baseline to Dart `^3.11.4`.
+* Upgraded direct package dependencies to current compatible releases:
+  * `build_web_compilers` to `^4.4.17`
+  * `crypto` to `^3.0.7`
+  * `ds_standard_features` to `^0.1.6`
+  * `jwt_generator` to `^0.0.9`
+
+### Fixed
+
+* Added injectable HTTP client support to `FingerprintAuth` for deterministic tests.
+* Aligned webhook-signature verification with the shipped examples using HMAC-SHA256.
+* Restored the backend validation child pipeline and corrected release changelog parsing.
+* Removed the stray `docs/test.txt` artifact from the publishable package.
+
+## [0.0.3]
 ### Updated
 
 * Bump SDK version to 3.10.3
 
-# 0.0.2
-
+## [0.0.2]
 ### Added
 
 * Documentation improvements for `README.md` and `example/` test setup to guide consumers on integrating the testing helpers.
@@ -47,8 +64,7 @@
 * Next step: prepare minor bump `0.2.0` for adding optional `browser_test` exports once reviewed.
 
 
-## 0.0.1
-
+## [0.0.1]
 ### Added
 - **Global .gitignore**  
   Added a `.gitignore` at the root of `fingerprint-dart-auth-sdk/` to ignore Flutter/Dart build artifacts (`build/`, `.dart_tool/`, `.flutter-plugins*`) and IDE folders (`.idea/`, `.vscode/`).
@@ -86,16 +102,14 @@
 
 
 
-## 0.0.1-pre+2
-
+## [0.0.1-pre+2]
 - Add All Methods
 - Cleanup Repo
 
-## 0.0.1-pre+1
-
+## [0.0.1-pre+1]
 - Add All Methods
 - Cleanup Repo
 
-## 0.0.1-pre
-
+## [0.0.1-pre]
 - Initial pre-release version of the fingerprint Dart Auth SDK.
+

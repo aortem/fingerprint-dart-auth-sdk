@@ -1,5 +1,14 @@
 {
   "projects": {
-    "default": "fire-base-dart-auth-sdk"
+    "default": "aortem-prod"
+  },
+  "targets": {
+    "aortem-prod": {
+      "hosting": {
+        "fingerprint-dart-auth-sdk-docs": [
+          "fingerprint-dart-auth-sdk-docs"
+        ]
+      }
+    }
   }
 }

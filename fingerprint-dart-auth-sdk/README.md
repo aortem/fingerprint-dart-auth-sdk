@@ -79,7 +79,7 @@ Or manually in your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  fingerprint_dart_auth_sdk: ^0.0.2
+  fingerprint_dart_auth_sdk: ^0.0.4
 ```
 
 Then fetch:

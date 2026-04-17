@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.0.4]
+### Updated
+
+* Raised the package baseline to Dart `^3.11.4`.
+* Upgraded direct package dependencies to current compatible releases:
+  * `build_web_compilers` to `^4.4.17`
+  * `crypto` to `^3.0.7`
+  * `ds_standard_features` to `^0.1.6`
+  * `jwt_generator` to `^0.0.9`
+
+### Fixed
+
+* Added injectable HTTP client support to `FingerprintAuth` for deterministic tests.
+* Aligned webhook-signature verification with the shipped examples using HMAC-SHA256.
+* Restored the backend validation child pipeline and corrected release changelog parsing.
+* Removed the stray `docs/test.txt` artifact from the publishable package.
+
 ## [0.0.3]
 ### Updated
 

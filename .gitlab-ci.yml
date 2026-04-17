@@ -44,6 +44,13 @@ debug_merge_request:
     - when: never
 
 # Validation Conditional Triggers for Docs
+validation_trigger:
+  stage: validation
+  trigger:
+    include: tools/pipelines/backend/child-ci-setup-validation.yml
+  rules:
+    - when: always
+
 validation_trigger_docs:
   stage: validation
   trigger:

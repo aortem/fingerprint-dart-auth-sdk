@@ -6,10 +6,25 @@
 This page summarizes the stable package release history for Fingerprint Dart Auth SDK and keeps the public docs aligned with the published SDK versions.
 '''
 
-=== Release Sources
+== Release Sources
 
 * Pubspec: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/pubspec.yaml
 * Changelog: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/CHANGELOG.md
+
+== v0.0.4
+
+=== Overview
+This release finalizes the Dart 3.11.4 baseline, restores test coverage, and aligns webhook-signature verification with the shipped examples.
+
+=== Highlights
+* Dart SDK baseline aligned to `^3.11.4`
+* Webhook-signature verification hardened with HMAC-SHA256
+* Validation and release-pipeline fixes
+
+=== Improvements
+* Upgraded direct package dependencies to current compatible releases.
+* Added injectable HTTP client support to `FingerprintAuth` for reliable testing.
+* Removed the stray docs artifact from the publishable package.
 
 == v0.0.3
 

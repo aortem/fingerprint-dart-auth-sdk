@@ -15,10 +15,6 @@ release:
       extract_changelog_version() {
         awk '
           match($0, /^## \[([^]]+)\]/, m) { print m[1]; exit }
-          match($0, /^## \*\*([^*]+)\*\*/, m) { print m[1]; exit }
-          match($0, /^## ([^ ]+)/, m) { print m[1]; exit }
-          match($0, /^# \*\*([^*]+)\*\*/, m) { print m[1]; exit }
-          match($0, /^# ([^ ]+)/, m) { print m[1]; exit }
         ' CHANGELOG.md
       }
 
@@ -26,11 +22,7 @@ release:
         local version="$1"
         awk -v version="$version" '
           $0 ~ ("^## \\[" version "\\]") { flag=1; next }
-          $0 ~ ("^## \\*\\*" version "\\*\\*") { flag=1; next }
-          $0 ~ ("^## " version "([[:space:]]|$)") { flag=1; next }
-          $0 ~ ("^# \\*\\*" version "\\*\\*") { flag=1; next }
-          $0 ~ ("^# " version "([[:space:]]|$)") { flag=1; next }
-          flag && ($0 ~ /^## \[/ || $0 ~ /^## \*\*/ || $0 ~ /^## [0-9]/ || $0 ~ /^# \*\*/ || $0 ~ /^# [0-9]/) { exit }
+          flag && ($0 ~ /^## \[/) { exit }
           flag { print }
         ' CHANGELOG.md
       }

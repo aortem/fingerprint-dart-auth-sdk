@@ -34,6 +34,9 @@ class ExtractQueryParams {
       if (keyValue.length != 2) {
         throw FormatException('Invalid query string format.');
       }
+      if (keyValue[0].isEmpty || keyValue[1].isEmpty) {
+        throw FormatException('Invalid query string format.');
+      }
       parsedParams[Uri.decodeComponent(keyValue[0])] = Uri.decodeComponent(
         keyValue[1],
       );

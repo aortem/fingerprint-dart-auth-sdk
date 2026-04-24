@@ -11,6 +11,26 @@ This page summarizes the stable package release history for Fingerprint Dart Aut
 * Pubspec: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/pubspec.yaml
 * Changelog: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/CHANGELOG.md
 
+== v0.0.5
+
+=== Overview
+This release restores clean package validation for the server-side FingerprintJS SDK surface, improves test discovery, and updates the public package documentation to match the shipped backend API.
+
+=== Highlights
+* Server-side README updated to describe FingerprintJS verification, visitor lookup, and webhook validation.
+* Package test suite restored for clean `dart test` discovery.
+* Publish dry-runs cleaned up by excluding docs and generated example artifacts from the package archive.
+
+=== Fixes
+* Fixed `DefaultErrorResponse.toString()` so error-response tests match the serialized output.
+* Tightened malformed query parsing to reject invalid query strings more predictably.
+* Corrected `IntegrationInfo` JSON handling for package tests.
+* Replaced empty integration test files with placeholder `main()` entries.
+
+=== Improvements
+* Removed unused runtime dependencies that belonged to example or test tooling instead of the published package.
+* Kept the published archive focused on the package source, examples, tests, metadata, and release docs needed by consumers.
+
 == v0.0.4
 
 === Overview

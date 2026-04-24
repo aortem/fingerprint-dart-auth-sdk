@@ -23,19 +23,17 @@ class IntegrationInfo {
   });
 
   @override
-  String toString() {
-    return 'IntegrationInfo(name: $name, type: $type, version: $version, publicKey: $publicKey)';
-  }
+  String toString() =>
+      'IntegrationInfo(type: $type, version: $version, publicKey: $publicKey)';
 
   /// Creates an instance from a JSON object.
   ///
-  /// Defaults to 'unknown' for missing values.
   factory IntegrationInfo.fromJson(Map<String, dynamic> json) {
     return IntegrationInfo(
-      name: json['name'] as String? ?? 'unknown',
-      type: json['type'] as String? ?? 'unknown',
-      version: json['version'] as String? ?? 'unknown',
-      publicKey: json['publicKey'] as String? ?? 'unknown',
+      name: json['name'] as String? ?? '',
+      type: json['type'] as String,
+      version: json['version'] as String,
+      publicKey: json['publicKey'] as String,
     );
   }
 }

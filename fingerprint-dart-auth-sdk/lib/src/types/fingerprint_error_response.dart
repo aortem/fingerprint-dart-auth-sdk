@@ -20,7 +20,7 @@ abstract class ErrorResponse {
 }
 
 /// A concrete implementation of [ErrorResponse].
-class DefaultErrorResponse implements ErrorResponse {
+class DefaultErrorResponse extends ErrorResponse {
   @override
   final int status;
 
@@ -53,7 +53,9 @@ class DefaultErrorResponse implements ErrorResponse {
   }
 
   @override
-  Map<String, dynamic> toJson() {
-    return {'status': status, 'error': error, 'message': message};
-  }
+  Map<String, dynamic> toJson() => {
+    'status': status,
+    'error': error,
+    'message': message,
+  };
 }

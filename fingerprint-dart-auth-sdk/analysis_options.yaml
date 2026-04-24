@@ -13,15 +13,25 @@
 
 include: package:lints/recommended.yaml
 
-# Uncomment the following section to specify additional rules.
-
 linter:
   rules:
-     - public_member_api_docs
+    - public_member_api_docs
 
-# analyzer:
-#   exclude:
-#     - path/to/excluded/files/**
+analyzer:
+  exclude:
+    - build/**
+    - doc/**
+    - docs/**
+    - example/**
+    - examples/**
+    - samples/**
+    - test/**/fixtures/**
+    - lib/**.g.dart
+    - lib/**.freezed.dart
+  errors:
+    todo: ignore
+    dead_code: ignore
+    unused_import: ignore
 
 # For more information about the core and recommended set of lints, see
 # https://dart.dev/go/core-lints

@@ -1,14 +1,24 @@
 # Changelog
 
+## [0.0.5]
+### Fixed
+
+* Restored package testability by fixing `DefaultErrorResponse.toString()`, stricter malformed query parsing, and `IntegrationInfo` JSON handling.
+* Replaced empty integration test files with placeholder `main()` entries so `dart test` can discover the suite cleanly.
+* Reworked the package README to match the shipped FingerprintJS server-side API surface instead of the older biometric/mobile positioning.
+
+### Changed
+
+* Trimmed unused runtime dependencies that were leaking example tooling into the published package.
+* Added package/archive excludes for docs and generated example web artifacts to keep publish dry-runs clean.
+
 ## [0.0.4]
 ### Updated
 
 * Raised the package baseline to Dart `^3.11.4`.
 * Upgraded direct package dependencies to current compatible releases:
-  * `build_web_compilers` to `^4.4.17`
   * `crypto` to `^3.0.7`
   * `ds_standard_features` to `^0.1.6`
-  * `jwt_generator` to `^0.0.9`
 
 ### Fixed
 

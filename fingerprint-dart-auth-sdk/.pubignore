@@ -1,0 +1,19 @@
+# Local/build artifacts
+.dart_tool/
+build/
+coverage/
+
+# Deployment and docs tooling not needed in the package archive
+doc/
+docs/
+firebase.json
+
+# Generated example artifacts
+example/**/.dart_tool/
+example/**/build/
+example/**/web/*.dart.js
+example/**/web/*.dart.js.deps
+example/**/web/*.dart.js.map
+example/fingerprint-dart-auth-sdk-dart-web-app/
+example/fingerprint-dart-auth-sdk-flutter-mobile-app/
+example/fingerprint-dart-auth-sdk-flutter-web-app/

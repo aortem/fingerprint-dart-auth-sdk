@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:ds_standard_features/ds_standard_features.dart' as http;
 
-typedef ResponseHandler = Future<http.Response> Function(http.BaseRequest request);
+typedef ResponseHandler =
+    Future<http.Response> Function(http.BaseRequest request);
 
 class FakeHttpClient extends http.BaseClient {
   FakeHttpClient(this._handler);

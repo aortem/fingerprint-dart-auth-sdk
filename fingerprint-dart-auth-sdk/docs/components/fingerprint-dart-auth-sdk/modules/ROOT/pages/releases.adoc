@@ -11,6 +11,19 @@ This page summarizes the stable package release history for Fingerprint Dart Aut
 * Pubspec: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/pubspec.yaml
 * Changelog: apps/sdks/fingerprint-dart-auth-sdk/fingerprint-dart-auth-sdk/CHANGELOG.md
 
+== v0.0.6
+
+=== Overview
+This compatibility release aligns fingerprint_dart_auth_sdk with the Dart 3.12 release line and the current Flutter stable tooling where applicable.
+
+=== Highlights
+* Dart SDK constraint updated to `^3.12.1`
+* Package version bumped for the Dart 3.12.2 upgrade pass
+* Maintained examples refreshed for current Dart and Flutter dependency resolution
+
+=== Notes
+* No API-breaking changes are intended in this release-prep update.
+
 == v0.0.5
 
 === Overview

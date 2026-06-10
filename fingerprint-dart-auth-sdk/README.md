@@ -13,7 +13,7 @@ This package focuses on server-side verification and FingerprintJS Pro API integ
 
 ```yaml
 dependencies:
-  fingerprint_dart_auth_sdk: ^0.0.5
+  fingerprint_dart_auth_sdk: ^0.0.6
 ```
 
 Then run:

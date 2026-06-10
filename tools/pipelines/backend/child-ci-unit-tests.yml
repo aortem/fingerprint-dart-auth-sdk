@@ -4,7 +4,7 @@ stages:
 # Transmit SDK Unit Tests
 unit_tests:
   stage: unit_tests
-  image: dart:stable
+  image: dart:3.12.2
   script:
     - echo "Running Unit Tests..."
     - cd fingerprint-dart-auth-sdk/test/unit/

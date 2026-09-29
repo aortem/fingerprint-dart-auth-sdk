@@ -1,6 +1,13 @@
 # Changelog
 
 
+
+## 0.0.7
+
+- Await retried requests inside the error handler, keeping asynchronous failures in the SDK error handling path.
+- Validate analysis, tests and the release archive on Dart 3.13.4.
+
+
 ## 0.0.6
 
 - Bumped package metadata for the Dart 3.12.2 upgrade pass.

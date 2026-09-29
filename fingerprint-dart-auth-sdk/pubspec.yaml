@@ -1,6 +1,6 @@
 name: fingerprint_dart_auth_sdk
 description: Server-side Dart SDK for FingerprintJS verification, visitor lookup, and webhook validation.
-version: 0.0.6
+version: 0.0.7
 repository: https://github.com/aortem/fingerprint-dart-auth-sdk
 license: BSD-3
 

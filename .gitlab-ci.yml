@@ -47,6 +47,7 @@ debug_merge_request:
 validation_trigger:
   stage: validation
   trigger:
+    strategy: depend
     include: tools/pipelines/backend/child-ci-setup-validation.yml
   rules:
     - when: always
@@ -54,6 +55,7 @@ validation_trigger:
 validation_trigger_docs:
   stage: validation
   trigger:
+    strategy: depend
     include: tools/pipelines/firebase-hosting/child-ci-production-docs.yml
   rules:
     - changes:
@@ -97,6 +99,7 @@ validation_trigger_docs:
 gitlab_github_release:
   stage: release
   trigger:
+    strategy: depend
     include: tools/pipelines/backend/child-ci-release.yml
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'

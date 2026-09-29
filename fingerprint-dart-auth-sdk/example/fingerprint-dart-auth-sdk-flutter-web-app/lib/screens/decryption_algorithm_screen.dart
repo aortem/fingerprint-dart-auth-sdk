@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fingerprint_dart_auth_sdk/fingerprint_dart_auth_sdk.dart';
+
 // import 'package:flutter_application_1/utils/globals.dart';
 
 /// Request model that includes DecryptionAlgorithm.

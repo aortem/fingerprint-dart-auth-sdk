@@ -88,3 +88,8 @@ print(isValid);
 ## Examples
 
 See the `example/` directory for maintained sample projects and integration references.
+
+
+## Dart compatibility
+
+Validated with Dart 3.13.4. The minimum supported SDK remains Dart 3.12.2.

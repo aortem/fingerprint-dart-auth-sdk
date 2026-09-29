@@ -47,6 +47,7 @@ debug_merge_request:
 validation_trigger:
   stage: validation
   trigger:
+    strategy: depend
     include: tools/pipelines/backend/child-ci-setup-validation.yml
   rules:
     - when: always
@@ -54,6 +55,7 @@ validation_trigger:
 validation_trigger_docs:
   stage: validation
   trigger:
+    strategy: depend
     include: tools/pipelines/firebase-hosting/child-ci-production-docs.yml
   rules:
     - changes:
@@ -97,7 +99,20 @@ validation_trigger_docs:
 gitlab_github_release:
   stage: release
   trigger:
+    strategy: depend
     include: tools/pipelines/backend/child-ci-release.yml
   rules:
-    - if: '$CI_COMMIT_BRANCH == "development"'
-      when: always
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+
+validate_package_dart313:
+  stage: validation
+  image: dart:3.13.4
+  rules:
+    - when: always
+  script:
+    - cd fingerprint-dart-auth-sdk
+    - dart pub get
+    - dart analyze
+    - dart test
+    - dart pub publish --dry-run

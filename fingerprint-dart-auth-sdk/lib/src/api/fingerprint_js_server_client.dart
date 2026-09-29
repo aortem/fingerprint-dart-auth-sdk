@@ -168,7 +168,7 @@ class FingerprintJsServerApiClient {
             'Rate limit exceeded. Retrying after: ${retryDuration.inSeconds} seconds',
           );
           await Future.delayed(retryDuration);
-          return _sendRequest<T>(
+          return await _sendRequest<T>(
             method: method,
             endpoint: endpoint,
             body: body,

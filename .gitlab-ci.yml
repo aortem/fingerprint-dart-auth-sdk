@@ -103,7 +103,7 @@ gitlab_github_release:
     include: tools/pipelines/backend/child-ci-release.yml
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
-      when: always
+      when: on_success
 
 validate_package_dart313:
   stage: validation

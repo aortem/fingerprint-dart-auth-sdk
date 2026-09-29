@@ -99,5 +99,17 @@ gitlab_github_release:
   trigger:
     include: tools/pipelines/backend/child-ci-release.yml
   rules:
-    - if: '$CI_COMMIT_BRANCH == "development"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
       when: always
+
+validate_package_dart313:
+  stage: validation
+  image: dart:3.13.4
+  rules:
+    - when: always
+  script:
+    - cd fingerprint-dart-auth-sdk
+    - dart pub get
+    - dart analyze
+    - dart test
+    - dart pub publish --dry-run
